@@ -1,0 +1,35 @@
+#titleImage{
+    width: 100%;
+    min-height:900px;
+    object-fit: cover;
+    object-position: 10% 50%;
+    opacity: 0.8
+}
+#overlayText{
+    position: absolute;
+    top: 30%;
+    right: 8%;
+    opacity: 0.85;
+}
+.overlayTextCenterFaded{
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.overlayTextCenterFaded:hover{
+    font-size: 180%;
+    color: #fdfeff !important;
+    background: transparent !important;
+}
+.imageMoreInfoOnHover{
+    background: black;
+}
+.imageMoreInfoOnHover:hover img{
+    opacity: 0.4;
+}
+.imageMoreInfoOnHover:hover a{
+    visibility: visible;
+}
+

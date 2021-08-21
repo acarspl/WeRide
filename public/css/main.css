@@ -1,9 +1,25 @@
+.table-no-wrap{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.link-as-text, .link-as-text:visited, .link-as-text:hover, .link-as-text:active{
+    color:white;
+    text-decoration: none;
+}
+body{
+    background: #f3f3f3;
+}
+.text-green{
+    color: #2a9055;
+}
 .btn-green{
     background-color: #2a9055;
     color: white;
 }
 .btn-green:hover{
     background-color: #37b86d;
+    color: white;
 }
 .btn-green-light{
     background-color: #49af6e;
@@ -11,6 +27,7 @@
 }
 .btn-green-light:hover{
     background-color: #54d68a;
+    color: white;
 }
 .bg-green{
     background-color: #2a9055;
@@ -19,15 +36,30 @@
     background-color: #49af6e;
 }
 .rhombus-right{
-    -webkit-transform: skewX(-15deg);
-    -moz-transform: skewX(-15deg);
-    -ms-transform: skewX(-15deg);
-    transform: skewX(-15deg);
+    -webkit-transform: skewX(-10deg);
+    -moz-transform: skewX(-10deg);
+    -ms-transform: skewX(-10deg);
+    transform: skewX(-10deg);
 }
 .rhombus-left{
-    -webkit-transform: skewX(15deg);
-    -moz-transform: skewX(15deg);
-    -ms-transform: skewX(15deg);
-    transform: skewX(15deg);
+    -webkit-transform: skewX(10deg);
+    -moz-transform: skewX(10deg);
+    -ms-transform: skewX(10deg);
+    transform: skewX(10deg);
+}
+.rhombus-left-content{
+    -webkit-transform: skewX(-10deg);
+    -moz-transform: skewX(-10deg);
+    -ms-transform: skewX(-10deg);
+    transform: skewX(-10deg);
+}
+.rhombus-right-content{
+    -webkit-transform: skewX(10deg);
+    -moz-transform: skewX(10deg);
+    -ms-transform: skewX(10deg);
+    transform: skewX(10deg);
+}
+.rounded-corners{
+    border-radius: 25px;
 }
 
