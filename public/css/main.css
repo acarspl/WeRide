@@ -1,0 +1,33 @@
+.btn-green{
+    background-color: #2a9055;
+    color: white;
+}
+.btn-green:hover{
+    background-color: #37b86d;
+}
+.btn-green-light{
+    background-color: #49af6e;
+    color: white;
+}
+.btn-green-light:hover{
+    background-color: #54d68a;
+}
+.bg-green{
+    background-color: #2a9055;
+}
+.bg-green-light{
+    background-color: #49af6e;
+}
+.rhombus-right{
+    -webkit-transform: skewX(-15deg);
+    -moz-transform: skewX(-15deg);
+    -ms-transform: skewX(-15deg);
+    transform: skewX(-15deg);
+}
+.rhombus-left{
+    -webkit-transform: skewX(15deg);
+    -moz-transform: skewX(15deg);
+    -ms-transform: skewX(15deg);
+    transform: skewX(15deg);
+}
+
