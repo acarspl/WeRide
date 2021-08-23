@@ -21,41 +21,15 @@
         <div class="col-12 col-md-10 col-lg-8">
             <div id="typesOfBikesCarousel" class="carousel slide" data-ride="carousel" >
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="{{asset('images/types_of_bikes/road_cycling.jpg')}}" alt="Road Cycling">
-                        <div class="carousel-caption">
-                            <h1 class="font-weight-bold">Road Cycling</h1>
-                            <h3>Experience less air resistance in a group</h3>
+                    @foreach(App\Models\TypeOfSport::all() as $sport)
+                        <div class="carousel-item @if($loop->first) active @endif">
+                            <img class="d-block w-100" src="{{asset($sport->picture)}}" alt="{{$sport->name}}">
+                            <div class="carousel-caption">
+                                <h1 class="font-weight-bold">{{$sport->name}}</h1>
+                                <h3>{{$sport->description}}</h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{{asset('images/types_of_bikes/gravel_ride.jpg')}}" alt="Gravel Riding">
-                        <div class="carousel-caption">
-                            <h1 class="font-weight-bold">Gravel Riding</h1>
-                            <h3>Explore unpaved roads and trails with friends</h3>
-                        </div>
-                    </div>
-                    <div class="carousel-item ">
-                        <img class="d-block w-100" src="{{asset('images/types_of_bikes/casual_ride_in_park.jpg')}}" alt="Bike Touring">
-                        <div class="carousel-caption">
-                            <h1 class="font-weight-bold">Bike Touring</h1>
-                            <h3>Explore cities and nature with others</h3>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{{asset('images/types_of_bikes/mtb.jpg')}}" alt="Mountain Biking">
-                        <div class="carousel-caption">
-                            <h1 class="font-weight-bold">Mountain Biking (MTB)</h1>
-                            <h3>Discover amazing places you never knew existed</h3>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{{asset('images/types_of_bikes/enduro.jpg')}}" alt="Enduro Biking">
-                        <div class="carousel-caption">
-                            <h1 class="font-weight-bold">Enduro Biking</h1>
-                            <h3>Be faster, improve your technique</h3>
-                        </div>
-                    </div>
+                        @endforeach
                 </div>
                 <a class="carousel-control-prev" href="#typesOfBikesCarousel" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
