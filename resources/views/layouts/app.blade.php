@@ -46,11 +46,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        @auth
+                            <li class="nav-item  mt-3 mx-1 mt-md-0">
+                                <a class="px-3 btn btn-green-light nav-link text-white rhombus-right"  href="">Explore</a>
+                            </li>
+                            <li class="nav-item  mt-3 mx-1 mt-md-0">
+                                <a class="px-3 btn btn-green-light nav-link text-white rhombus-right"  href="">My Events</a>
+                            </li>
+                        <li class="nav-item  mt-3 mr-3 ml-1 mt-md-0">
+                            <a class="px-3 btn btn-green-light nav-link text-white rhombus-right border border-white" style="border-width: 1px!important;"  href="">Create Ride</a>
+                        </li>
+                        @endauth
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -66,7 +76,7 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white mt-3 mt-md-0 text-center" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
