@@ -20,6 +20,7 @@ class CreateUserPreferencesTable extends Migration
             foreach ($sports as $sport){
                 $table->boolean($sport)->default(true);
             }
+            $table->boolean('metric')->default(true);
             $table->double('location_lat')->nullable();
             $table->double('location_lng')->nullable();
             $table->timestamps();
