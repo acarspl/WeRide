@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\UserType;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             TypeOfSportSeeder::class,
+            UserTypeSeeder::class,
         ]);
 
         // \App\Models\User::factory(10)->create();

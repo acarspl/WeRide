@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TypeOfSport;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,6 +15,7 @@ class TypeOfSportSeeder extends Seeder
      */
     public function run()
     {
+        TypeOfSport::truncate();
         DB::table('type_of_sports')->insert([
             'name' => 'Road Cycling',
             'short_name' => 'Cycling',
