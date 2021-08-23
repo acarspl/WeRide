@@ -17,10 +17,10 @@ class CreateRacesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('user_id')->constrained();
-            $table->dateTime('event_start_time');
+            $table->dateTime('start_time');
             $table->double('start_location_lat');
             $table->double('start_location_lng');
-            $table->dateTime('event_end_time');
+            $table->dateTime('end_time');
             $table->double('end_location_lat');
             $table->double('end_location_lng');
             $table->foreignId('sport_type_id')->constrained('type_of_sports','id');

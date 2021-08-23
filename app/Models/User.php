@@ -48,4 +48,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function preferences(){
         return $this->hasOne(UserPreference::class);
     }
+    public function races(){
+        return $this->hasMany(Race::class);
+    }
+    public function rides(){
+        return $this->hasMany(Ride::class);
+    }
 }
