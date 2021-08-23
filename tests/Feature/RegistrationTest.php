@@ -32,12 +32,7 @@ class RegistrationTest extends TestCase
         $user = User::first();
         $user->email_verified_at = now();
         $this->actingAs($user)->get('home')->assertStatus(200);
-    }
-    public function test_user_has_preferences(){
         $this->assertNotNull(User::first()->preferences);
-    }
-    public function test_user_is_standard(){
         $this->assertTrue(User::first()->type->name == 'standard');
     }
-
 }
