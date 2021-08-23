@@ -25,11 +25,13 @@ class RegistrationTest extends TestCase
                 'password' => 'passwordtest',
                 'password_confirmation' => 'passwordtest'
             ];
-        $response = $this->post('/register', $user);
-        $response->assertRedirect('/home')->assertStatus(302);
+        $this->post('/register', $user);
+        $this->get('/home')->assertStatus(302)->assertRedirect('email/verify');
         array_splice($user,2,2);
         $this->assertDatabaseHas('users', $user);
-
+        $user = User::first();
+        $user->email_verified_at = now();
+        $this->actingAs($user)->get('home')->assertStatus(200);
     }
     public function test_user_has_preferences(){
         $this->assertNotNull(User::first()->preferences);
