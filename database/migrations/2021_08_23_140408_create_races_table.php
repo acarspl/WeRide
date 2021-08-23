@@ -25,15 +25,15 @@ class CreateRacesTable extends Migration
             $table->double('end_location_lng');
             $table->foreignId('sport_type_id')->constrained('type_of_sports','id');
             $table->double('distance');
-            $table->double('elevation');
-            $table->text('waypoints');
-            $table->string('route_link');
-            $table->integer('max_users');
-            $table->dateTime('signing_deadline');
-            $table->double('price');
-            $table->text('description');
-            $table->text('requirements');
-            $table->text('additional_information');
+            $table->double('elevation')->default(0);
+            $table->text('waypoints')->nullable();
+            $table->string('route_link')->nullable();
+            $table->integer('max_users')->nullable();
+            $table->dateTime('signing_deadline')->nullable();
+            $table->double('price')->nullable();
+            $table->text('description')->nullable();
+            $table->text('requirements')->nullable();
+            $table->text('additional_information')->nullable();
         });
     }
 

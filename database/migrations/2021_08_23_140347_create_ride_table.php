@@ -26,18 +26,18 @@ class CreateRideTable extends Migration
             $table->foreignId('sport_type_id')->constrained('type_of_sports','id');
             $table->integer('estimated_effort');
             $table->double('distance');
-            $table->double('elevation');
-            $table->text('waypoints');
-            $table->string('route_link');
-            $table->integer('going_outside_website');
-            $table->integer('max_users');
+            $table->double('elevation')->default(0);
+            $table->text('waypoints')->nullable();
+            $table->string('route_link')->nullable();
+            $table->integer('going_outside_website')->default(1);
+            $table->integer('max_users')->default(64);
             $table->integer('speed_min');
             $table->integer('speed_max');
-            $table->dateTime('signing_deadline');
-            $table->text('description');
-            $table->text('additional_information');
-            $table->boolean('helmet_required');
-            $table->boolean('lights_required');
+            $table->dateTime('signing_deadline')->nullable();;
+            $table->text('description')->nullable();;
+            $table->text('additional_information')->nullable();;
+            $table->boolean('helmet_required')->default(true);
+            $table->boolean('lights_required')->default(false);
 
 
 
