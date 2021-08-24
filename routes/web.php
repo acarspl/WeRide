@@ -20,3 +20,10 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+
+Route::middleware('auth')->group(function(){
+    Route::get('/race/create',[\App\Http\Controllers\RaceController::class, 'create'])->name('race.create');
+    Route::post('/race',[\App\Http\Controllers\RaceController::class, 'store'])->name('race.store');
+    Route::get('/ride/create',[\App\Http\Controllers\RideController::class, 'create'])->name('ride.create');
+    Route::post('/ride',[\App\Http\Controllers\RideController::class, 'store'])->name('ride.store');
+});
