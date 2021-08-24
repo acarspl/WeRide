@@ -19,9 +19,17 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('images/logo/bike_green.png') }}">
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
 
 </head>
 <body>
@@ -58,7 +66,7 @@
                                 <a class="px-3 btn btn-green-light nav-link text-white rhombus-right"  href="">My Events</a>
                             </li>
                         <li class="nav-item  mt-3 mr-3 ml-1 mt-md-0">
-                            <a class="px-3 btn btn-green-light nav-link text-white rhombus-right border border-white" style="border-width: 1px!important;"  href="">Create Ride</a>
+                            <a class="px-3 btn btn-green-light nav-link text-white rhombus-right border border-white" style="border-width: 1px!important;"  href="{{route('ride.create')}}">Create Ride</a>
                         </li>
                         @endauth
                         <!-- Authentication Links -->
