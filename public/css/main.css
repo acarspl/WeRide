@@ -35,6 +35,9 @@ body{
 .bg-green-light{
     background-color: #49af6e;
 }
+.bg-black{
+    background: black;
+}
 .rhombus-right{
     -webkit-transform: skewX(-10deg);
     -moz-transform: skewX(-10deg);
@@ -61,5 +64,11 @@ body{
 }
 .rounded-corners{
     border-radius: 25px;
+}
+.overlayTextCenter{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
