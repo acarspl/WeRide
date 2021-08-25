@@ -14,3 +14,7 @@
     position: absolute;
     bottom: 1%;
 }
+.formLabelBigger{
+    font-size: 120%;
+    font-weight: bold;
+}
