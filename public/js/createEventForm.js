@@ -104,12 +104,16 @@ $('.speed_button').on('click',function(){
         metricAverageSpeed = false;
         $('#speed_min').val(kilometersToMiles($('#speed_min').val()));
         $('#speed_max').val(kilometersToMiles($('#speed_max').val()));
+        $('#speed_max').attr('min',$('#speed_min').val());
+        $('#speed_min').attr('max',$('#speed_max').val());
     }
     else{
         $('.speed_button').addClass('btn-primary').removeClass('btn-outline-primary').text('Kph');
         metricAverageSpeed = true;
         $('#speed_min').val(milesToKilometers($('#speed_min').val()));
         $('#speed_max').val(milesToKilometers($('#speed_max').val()));
+        $('#speed_max').attr('min',$('#speed_min').val());
+        $('#speed_min').attr('max',$('#speed_max').val());
     }
 });
 $('#speed_min').change(function () {
