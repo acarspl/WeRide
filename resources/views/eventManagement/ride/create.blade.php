@@ -14,7 +14,7 @@
                 <h4 class="text-center text-white mt-2 mx-3">Create a new ride</h4>
             </div>
             <div class="card-body">
-                <form action="{{route('ride.store')}}" method="POST">
+                <form id="create_ride_form" action="{{route('ride.store')}}" method="POST">
                     @csrf
                     @method('post')
                     {{--SPORT SELECTOR--}}
@@ -48,7 +48,7 @@
                         {{--END OF SPORT SELECTOR--}}
                     <div class="form-group text-center mt-3">
                         <label for="start_time" class="formLabelBigger">Start Time</label>
-                        <input type="datetime-local" class="form-control text-center col-10 col-sm-6 mx-auto" id="start_time" name="start_time" value="{{substr(\Carbon\Carbon::now()->addHour()->toDateTimeLocalString(),0,16)}}"
+                        <input type="datetime-local" class="form-control text-center col-10 col-sm-6 mx-auto" id="start_time" name="start_time" value="{{substr(\Carbon\Carbon::now()->addHours(2)->toDateTimeLocalString(),0,16)}}"
                                min="{{substr(\Carbon\Carbon::now()->toDateTimeLocalString(),0,16)}}" max="{{substr(\Carbon\Carbon::now()->addYear()->toDateTimeLocalString(),0,16)}}" required>
                     </div>
                     <div class="form-group text-center">
@@ -63,8 +63,8 @@
                     <div class="form-group d-none text-center" id="end_location">
                         <label class="formLabelBigger">Finish Location</label>
                         <div id="end_location_map" style="height: 400px"></div>
-                        <input type="hidden" value="null" id="end_location_lat" name="end_location_lat">
-                        <input type="hidden" value="null" id="end_location_lng" name="end_location_lng">
+                        <input type="hidden" value="" id="end_location_lat" name="end_location_lat">
+                        <input type="hidden" value="" id="end_location_lng" name="end_location_lng">
                     </div>
                         <div class="form-group mt-4 text-center">
                             <label for="estimated_effort" class="form-label formLabelBigger">Estimated Effort</label>
@@ -85,7 +85,7 @@
                         <div class="form-group text-center">
                             <label for="elevation" class="formLabelBigger">Elevation</label>
                             <div class="row mx-auto col-7 col-md-5">
-                                <input type="number" min="0" max="30000" step="1" value="0" class="pl-5 form-control col-8 col-md-9 col-xl-10 text-center" id="elevation" required>
+                                <input type="number" min="0" max="90000" step="1" value="0" class="pl-5 form-control col-8 col-md-9 col-xl-10 text-center" id="elevation" required>
                                 <input type="hidden" min="0" value="0"  id="elevation_final" name="elevation">
                                 <button class="btn btn-primary col-4 col-md-3 col-xl-2" type="button" id="elevation_button">M</button>
                             </div>
@@ -97,7 +97,7 @@
                             </div>
                             <div class="form-group col-6">
                                 <label for="max_users" class="formLabelBigger">Maximum number of people</label>
-                                <input type="number" min="2" max="2000" step="1" value="100" class="form-control text-center" id="max_users" name="max_users" required>
+                                <input type="number" min="2" max="5000" step="1" value="100" class="form-control text-center" id="max_users" name="max_users" required>
                             </div>
                         </div>
                         <div class="row">
@@ -133,8 +133,8 @@
                         </div>
                         <div class="form-group text-center">
                             <label class="formLabelBigger">Requirements</label>
-                            <input type="hidden" id="helmet_required" name="helmet_required" value="true">
-                            <input type="hidden" id="lights_required" name="lights_required" value="false">
+                            <input type="hidden" id="helmet_required" name="helmet_required" value=1>
+                            <input type="hidden" id="lights_required" name="lights_required" value=0>
                             <div class="row mx-auto justify-content-center">
                                 <div class="col-5 col-md-4 col-lg-3 mb-1 px-0 bg-black requirements_box" id="helmet_box" style="position: relative; border-top-left-radius:15px;  border-bottom-left-radius:15px">
                                     <img id="helmet_image" style="width: 100%; border-top-left-radius:15px;  border-bottom-left-radius:15px" src="{{asset('images/equipment/helmet.jpg')}}" alt="Helmet">
@@ -146,7 +146,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-success btn-block mt-3" type="button">Create</button>
+                        <button class="btn btn-success btn-block mt-3" id="create_ride_button" type="submit">Create</button>
 
                     </div>
                 </form>

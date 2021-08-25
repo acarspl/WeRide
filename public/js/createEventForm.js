@@ -117,6 +117,7 @@ $('#speed_min').change(function () {
 });
 function setMinSpeedFinal(){
     $('#speed_min_final').val(convertSpeedToMetrics($('#speed_min').val()));
+    $('#speed_max').attr('min',$('#speed_min').val());
 }
 function convertSpeedToMetrics(speed){
     if(metricAverageSpeed){
@@ -132,6 +133,7 @@ $('#speed_max').change(function () {
 });
 function setMaxSpeedFinal(){
     $('#speed_max_final').val(convertSpeedToMetrics($('#speed_max').val()));
+    $('#speed_min').attr('max',$('#speed_max').val());
 }
 
 // set signing deadline value and max
@@ -146,21 +148,21 @@ function changeDateToDateTimeLocale(date){
 }
 //REQUIREMENTS SELECTOR
 $("#helmet_box").on('click',function (e) {
-    if(Boolean($('#helmet_required').val())===true){
-        $('#helmet_required').val(false);
+    if(Boolean($('#helmet_required').val())===1){
+        $('#helmet_required').val(0);
     }
     else{
-        $('#helmet_required').val(true);
+        $('#helmet_required').val(1);
     }
     $("#helmet_image").toggleClass('strongerFadedImage');
     $("#helmet_text").toggleClass('fadedText').toggleClass('bg-black-semi-transparent');
 });
 $("#lights_box").on('click',function (e) {
-    if(Boolean($('#lights_required').val())===true){
-        $('#lights_required').val(false);
+    if(Boolean($('#lights_required').val())===1){
+        $('#lights_required').val(0);
     }
     else{
-        $('#lights_required').val(true);
+        $('#lights_required').val(1);
     }
     $("#lights_image").toggleClass('strongerFadedImage');
     $("#lights_text").toggleClass('fadedText').toggleClass('bg-black-semi-transparent');

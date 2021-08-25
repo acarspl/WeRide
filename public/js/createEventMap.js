@@ -80,8 +80,8 @@ $("#round_trip_button").on('click',function(){
     }
     else{
         $("#round_trip_button").removeClass('btn-outline-success').addClass('btn-success').text("Round Trip");
-        $('#end_location_lat').val(null);
-        $('#end_location_lng').val(null);
+        $('#end_location_lat').val('');
+        $('#end_location_lng').val('');
         endMarker.remove();
         endMarker = false;
         $("#end_location").addClass('d-none');
