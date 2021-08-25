@@ -29,6 +29,18 @@ class CreateRaceTest extends TestCase
         $this->assertEquals(Race::first()->distance , $race['distance']);
         $this->assertEquals(Race::first()->user_id , Auth::id());
     }
+    public function test_verified_user_can_create_race_end_location_not_given(){
+        User::factory()->create();
+        $user = Auth::loginUsingId(1);
+        $this->actingAs($user);
+        $race = Race::factory()->withoutEndLocation()->make()->toArray();
+        $response = $this->post(route('race.store'),$race);
+        $response->assertStatus(302);
+        $this->assertDatabaseCount('races',1);
+        $this->assertEquals(Race::first()->distance , $race['distance']);
+        $this->assertEquals(Race::first()->user_id , Auth::id());
+        $this->assertEquals(Race::first()->end_location_lat , $race['start_location_lat']);
+    }
     public function test_guest_cannot_create_race(){
         $race = Race::factory()->make()->toArray();
         $response = $this->post(route('race.store'),$race);
