@@ -32,6 +32,10 @@ class RideFactory extends Factory
             'sport_type_id' => 1,
             'estimated_effort'=>3,
             'distance' => random_int(1,100),
+            'elevation' => 0,
+            'going_outside_website' =>1,
+            'signing_deadline' =>Carbon::now()->addHour(),
+            'max_users'=>34,
             'speed_min' => 30,
             'speed_max' => 35,
         ];
@@ -42,6 +46,15 @@ class RideFactory extends Factory
             return [
                 'start_time' => Carbon::now()->subDays(3),
                 'end_time' => Carbon::now()->subDays(3)->addHour(),
+            ];
+        });
+    }
+    public function withoutEndLocation()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'end_location_lat' => null,
+                'end_location_lng' => null,
             ];
         });
     }

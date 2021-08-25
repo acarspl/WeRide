@@ -145,11 +145,15 @@ let startTime = null;
 $('#start_time').change(function () {
     startTime = new Date($('#start_time').val());
     $('#signing_deadline').val(changeDateToDateTimeLocale(startTime)).attr('max',changeDateToDateTimeLocale(startTime));
+    $('#end_time').val(changeDateToDateTimeLocale(startTime)).attr('min',changeDateToDateTimeLocale(startTime));
 });
 function changeDateToDateTimeLocale(date){
     let isoStr = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString();
     return isoStr.substring(0,isoStr.length-1);
 }
+
+
+
 //REQUIREMENTS SELECTOR
 $("#helmet_box").on('click',function (e) {
     if(Boolean($('#helmet_required').val())===1){

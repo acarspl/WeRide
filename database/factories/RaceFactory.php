@@ -31,6 +31,10 @@ class RaceFactory extends Factory
             'end_location_lng'=>21.008567,
             'sport_type_id' => 1,
             'distance' => random_int(1,100),
+            'elevation' => 0,
+            'signing_deadline' =>Carbon::now()->addHour(),
+            'max_users'=>34,
+            'price'=>300,
         ];
     }
     public function past()
@@ -41,4 +45,15 @@ class RaceFactory extends Factory
                 'end_time' => Carbon::now()->subDays(3)->addHour(),
             ];
         });
-    }}
+    }
+    public function withoutEndLocation()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'end_location_lat' => null,
+                'end_location_lng' => null,
+            ];
+        });
+    }
+}
+

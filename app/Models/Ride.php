@@ -15,7 +15,7 @@ class Ride extends Model
 
     public $table = 'rides';
     protected $guarded = ['id','user_id'];
-    protected $casts = ['start_time' => 'datetime', 'end_time'=> 'datetime'];
+    protected $casts = ['start_time' => 'datetime', 'end_time'=> 'datetime','signing_deadline'=>'datetime'];
 
     public static function calculateEndTime($distance, $start_time, $min_speed, $max_speed){
         $start_time = Carbon::parse($start_time);
