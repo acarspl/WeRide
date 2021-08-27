@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -51,7 +52,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public function races(){
         return $this->hasMany(Race::class);
     }
+    public function activeRaces(){
+        return $this->races()->whereDate('start_time','>=', Carbon::now())->get();
+    }
     public function rides(){
         return $this->hasMany(Ride::class);
+    }
+    public function activeRides(){
+        return $this->rides()->whereDate('start_time','>=', Carbon::now())->get();
     }
 }
