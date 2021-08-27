@@ -71,7 +71,7 @@
                                     <img src="{{asset('images/icons/requirements/helmet.png')}}" alt="Helmet" width="35px">
                                 @endif
                                 @if($event->lights_required)
-                                    <img src="{{asset('images/icons/requirements/lights.png')}}" alt="Lights" width="35px">
+                                    <img src="{{asset('images/icons/requirements/lights.png')}}" alt="Lights" width="35px" class="mx-2">
                                 @endif </td>
                         @endif
                     </tr>
