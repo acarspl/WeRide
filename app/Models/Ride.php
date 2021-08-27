@@ -6,7 +6,6 @@ use App\Traits\SportEventTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
 
 class Ride extends Model
 {
@@ -17,9 +16,9 @@ class Ride extends Model
     protected $guarded = ['id','user_id'];
     protected $casts = ['start_time' => 'datetime', 'end_time'=> 'datetime','signing_deadline'=>'datetime'];
 
-    public static function calculateEndTime($distance, $start_time, $min_speed, $max_speed){
-        $start_time = Carbon::parse($start_time);
-        $timeInMinutes = ($distance*1000)/(self::calculateAverageSpeed($min_speed, $max_speed)*16.666);
+    public function calculateEndTime(){
+        $start_time = Carbon::parse($this->start_time);
+        $timeInMinutes = ($this->distance*1000)/(self::calculateAverageSpeed($this->speed_min, $this->speed_max)*16.666);
         return $start_time->addMinutes($timeInMinutes)->toDateTimeString();
     }
     public static function calculateAverageSpeed($min, $max){

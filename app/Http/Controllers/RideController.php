@@ -17,7 +17,7 @@ class RideController extends Controller
         $ride = new Ride();
         $ride->fill($request->validated());
         $ride->user_id = Auth::id();
-        $ride->end_time = Ride::calculateEndTime($request->get('distance'), $request->get('start_time'),$request->get('speed_min'), $request->get('speed_max'));
+        $ride->end_time = $ride->calculateEndTime();
         if((is_null($request->get('end_location_lat')) && is_null($request->get('end_location_lng')))){
             $ride->end_location_lat = $request->get('start_location_lat');
             $ride->end_location_lng = $request->get('start_location_lng');
