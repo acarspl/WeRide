@@ -17,6 +17,7 @@ class CreateRidesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('user_id')->constrained();
+            $table->string('name');
             $table->dateTime('start_time');
             $table->double('start_location_lat');
             $table->double('start_location_lng');

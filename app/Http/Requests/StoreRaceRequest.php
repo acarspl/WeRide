@@ -24,6 +24,7 @@ class StoreRaceRequest extends FormRequest
     public function rules()
     {
         return [
+            'name'=>'required|string|min:4|max:200',
             'sport_type_id'=>'required|numeric|min:1|max:99',
             'start_time' =>'required|date|after:yesterday',
             'end_time' =>'required|date|after_or_equal:start_time',

@@ -24,6 +24,7 @@ class StoreRideRequest extends FormRequest
     public function rules()
     {
         return [
+            'name'=>'required|string|min:4|max:200',
             'sport_type_id'=>'required|numeric|min:1|max:99',
             'start_time' =>'required|date|after:yesterday',
             'start_location_lat'=>'required|numeric|min:-90|max:90',

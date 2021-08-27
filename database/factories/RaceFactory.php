@@ -23,6 +23,7 @@ class RaceFactory extends Factory
     public function definition()
     {
         return [
+            'name'=>'Test Race',
             'start_time'=>Carbon::now()->addHour(),
             'start_location_lat'=> 52.22907312,
             'start_location_lng'=>21.008567,

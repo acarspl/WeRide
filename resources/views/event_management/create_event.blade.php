@@ -46,6 +46,10 @@
                         </div>
                         <hr>
                         {{--END OF SPORT SELECTOR--}}
+                        <div class="form-group text-center mx-auto">
+                            <label for="name" class="formLabelBigger">Event Name</label>
+                            <textarea maxlength="200" minlength="4" class="form-control text-center" id="name" name="name" rows="1" required></textarea>
+                        </div>
                         <div class="form-group text-center mt-3">
                             <label for="start_time" class="formLabelBigger">Start Time</label>
                             <input type="datetime-local" class="form-control text-center col-10 col-sm-6 mx-auto" id="start_time" name="start_time" value="{{substr(\Carbon\Carbon::now()->addHours(2)->toDateTimeLocalString(),0,16)}}"
