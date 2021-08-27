@@ -66,7 +66,7 @@
                                 <a class="px-3 btn btn-green-light nav-link text-white rhombus-right"  href="">Explore</a>
                             </li>
                             <li class="nav-item  mt-3 mx-1 mt-md-0">
-                                <a class="px-3 btn btn-green-light nav-link text-white rhombus-right"  href="">My Events</a>
+                                <a class="px-3 btn btn-green-light nav-link text-white rhombus-right"  href="{{route('events.my.index')}}">My Events</a>
                             </li>
                         <li class="nav-item  mt-3 mr-3 ml-1 mt-md-0">
                             <a class="px-3 btn btn-green-light nav-link text-white rhombus-right border border-white" style="border-width: 1px!important;"  href="{{route('ride.create')}}">Create Ride</a>

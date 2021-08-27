@@ -45,16 +45,16 @@
 
     {{--LOCAL RACES / GROUP RIDES--}}
     <div class="row justify-content-center text-center mx-0 mt-5">
-        <h2 class="py-3 col-6 col-lg-5 col-xl-4 m-0 bg-green text-white" style="border-top-left-radius:15px">Local Races</h2>
-        <h2 class="py-3 col-6 col-lg-5 col-xl-4 m-0 bg-green text-white" style="border-top-right-radius:15px">Group Rides</h2>
+        <h2 class="py-3 col-6 col-lg-5 col-xl-4 m-0 bg-green text-white round-top-left" >Local Races</h2>
+        <h2 class="py-3 col-6 col-lg-5 col-xl-4 m-0 bg-green text-white round-top-right" >Group Rides</h2>
     </div>
     <div class="row justify-content-center mx-0">
-        <div class="col-6 col-lg-5 col-xl-4 p-0 imageMoreInfoOnHover" style="position:relative; border-bottom-left-radius:15px;">
-            <img src="{{asset('images/bikers/road_race.jpg')}}"  style="width: 100%;border-bottom-left-radius:15px;" alt="Road race">
+        <div class="col-6 col-lg-5 col-xl-4 p-0 imageMoreInfoOnHover round-bottom-left" style="position:relative;">
+            <img src="{{asset('images/bikers/road_race.jpg')}}" class="round-bottom-left"  style="width: 100%;" alt="Road race">
             <a class="btn btn-outline-light btn-lg overlayTextCenterFaded" href="#" >Find out more</a>
         </div>
-        <div class="col-6 col-lg-5 col-xl-4 p-0 imageMoreInfoOnHover" style="position:relative; border-bottom-right-radius:15px">
-            <img src="{{asset('images/bikers/city_bikers.jpg')}}" style=" width: 100%; border-bottom-right-radius:15px" alt="Group Ride">
+        <div class="col-6 col-lg-5 col-xl-4 p-0 imageMoreInfoOnHover round-bottom-right" style="position:relative;">
+            <img src="{{asset('images/bikers/city_bikers.jpg')}}" class="round-bottom-right" style=" width: 100%;" alt="Group Ride">
             <a class="btn btn-outline-light btn-lg overlayTextCenterFaded" href="#" >Find out more</a>
         </div>
     </div>

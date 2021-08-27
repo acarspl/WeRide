@@ -11,7 +11,7 @@ class RideController extends Controller
 {
     public function create(){
         $isRace = false;
-        return view('event_management.createEvent', compact('isRace'));
+        return view('event_management.create_event', compact('isRace'));
     }
     public function store(StoreRideRequest $request){
         $ride = new Ride();

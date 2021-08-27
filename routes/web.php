@@ -27,4 +27,5 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::post('/race',[\App\Http\Controllers\RaceController::class, 'store'])->name('race.store');
     Route::get('/ride/create',[\App\Http\Controllers\RideController::class, 'create'])->name('ride.create');
     Route::post('/ride',[\App\Http\Controllers\RideController::class, 'store'])->name('ride.store');
+    Route::get('/events/my',[\App\Http\Controllers\EventController::class,'indexMyEvents'])->name('events.my.index');
 });

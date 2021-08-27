@@ -71,4 +71,16 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.round-top-left{
+    border-top-left-radius:15px;
+}
+.round-top-right{
+    border-top-right-radius:15px;
+}
+.round-bottom-left{
+    border-bottom-left-radius:15px;
+}
+.round-bottom-right{
+    border-bottom-right-radius:15px;
+}
 

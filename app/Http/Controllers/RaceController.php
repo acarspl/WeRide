@@ -10,7 +10,7 @@ class RaceController extends Controller
 {
     public function create(){
         $isRace = true;
-        return view('event_management.createEvent',compact('isRace'));
+        return view('event_management.create_event',compact('isRace'));
     }
     public function index(){
         return view('event_management.race.index');
