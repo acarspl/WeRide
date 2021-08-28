@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -60,5 +61,26 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function activeRides(){
         return $this->rides()->whereDate('start_time','>=', Carbon::now())->get();
+    }
+    public function participatedRaces(){
+        return $this->morphedByMany(Race::class, 'participated','participants', 'participant_id','participated_id');
+    }
+    public function participatedRides(){
+        return $this->morphedByMany(Ride::class, 'participated','participants','participant_id','participated_id');
+    }
+    public function joinRide(Ride $ride){
+        if($ride->user_id != $this->id){
+            $this->participatedRides()->save($ride);
+            return true;
+        }
+        return
+            false;
+    }
+    public function joinRace(Race $race){
+        if($race->user_id != $this->id){
+            $this->participatedRaces()->save($race);
+            return true;
+        }
+        return false;
     }
 }

@@ -25,5 +25,7 @@ trait SportEventTrait{
     public function startingPointMatchesFinish(){
         return $this->start_location_lat === $this->end_location_lat && $this->start_location_lng === $this->end_location_lng;
     }
-
+    public function participants(){
+        return $this->morphToMany(User::class,'participated','participants','participated_id','participant_id');
+    }
 }
