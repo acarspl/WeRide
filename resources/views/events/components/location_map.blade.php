@@ -1,4 +1,4 @@
-<div id="start_map_{{$iteration}}" style="height: {{$height}}px">
+<div id="location_map_{{$iteration}}" style="height: {{$height}}px">
 
 </div>
 <script type="text/javascript">
@@ -7,4 +7,4 @@
      lat = '{{$lat}}';
      lng = '{{$lng}}';
 </script>
-<script type="text/javascript" src="{{asset('js/showStartLocation.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/showLocationOnMap.js')}}"></script>

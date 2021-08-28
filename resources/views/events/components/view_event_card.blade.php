@@ -6,7 +6,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-6">
-                @include('events.components.start_location_map', ['lat'=>$event->start_location_lat,'lng'=>$event->start_location_lng,'iteration'=>$loop,'height'=>300])
+                @include('events.components.location_map', ['lat'=>$event->start_location_lat,'lng'=>$event->start_location_lng,'iteration'=>$loop,'height'=>300])
             </div>
             <div class="col-6 my-auto">
                 <table class="table table-sm ">

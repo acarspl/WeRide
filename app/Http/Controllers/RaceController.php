@@ -27,4 +27,9 @@ class RaceController extends Controller
         return back();
         // @TODO TO redirect to view the ride
     }
+    public function show(Race $race){
+        $event = $race;
+        $event->isRace = true;
+        return view('events.event_view.show', compact('event'));
+    }
 }

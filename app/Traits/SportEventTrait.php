@@ -22,5 +22,8 @@ trait SportEventTrait{
     public function maxSpeedInMilesPerHour(){
         return round($this->speed_max / 1.609,0);
     }
+    public function startingPointMatchesFinish(){
+        return $this->start_location_lat === $this->end_location_lat && $this->start_location_lng === $this->end_location_lng;
+    }
 
 }

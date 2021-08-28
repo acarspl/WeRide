@@ -83,4 +83,16 @@ body{
 .round-bottom-right{
     border-bottom-right-radius:15px;
 }
+.round-all-edges{
+    border-top-left-radius:15px;
+    border-top-right-radius:15px;
+    border-bottom-left-radius:15px;
+    border-bottom-right-radius:15px;
+}
+.fadedImage{
+    opacity: 0.4;
+}
+.fadedText{
+    opacity: 0.6;
+}
 
