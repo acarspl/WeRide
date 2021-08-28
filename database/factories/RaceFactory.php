@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Race;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -53,6 +54,14 @@ class RaceFactory extends Factory
             return [
                 'end_location_lat' => null,
                 'end_location_lng' => null,
+            ];
+        });
+    }
+    public function byUser(User $user)
+    {
+        return $this->state(function (array $attributes) use ($user) {
+            return [
+                'user_id'=>$user->id,
             ];
         });
     }

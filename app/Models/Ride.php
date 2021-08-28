@@ -15,6 +15,7 @@ class Ride extends Model
     public $table = 'rides';
     protected $guarded = ['id','user_id'];
     protected $casts = ['start_time' => 'datetime', 'end_time'=> 'datetime','signing_deadline'=>'datetime'];
+    public $isRace =false;
 
     public function calculateEndTime(){
         $start_time = Carbon::parse($this->start_time);
@@ -23,5 +24,8 @@ class Ride extends Model
     }
     public static function calculateAverageSpeed($min, $max){
         return ($min+$max)/2;
+    }
+    public static function indexActive(){
+        return Ride::where('start_time','>=', Carbon::now())->get();
     }
 }

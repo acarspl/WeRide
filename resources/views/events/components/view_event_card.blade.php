@@ -11,6 +11,12 @@
             <div class="col-6 my-auto">
                 <table class="table table-sm ">
                     <tbody>
+                    @if(\Illuminate\Support\Facades\Auth::id()!=$event->user_id)
+                        <tr>
+                            <th>Organiser</th>
+                            <td>{{$event->user->name}}</td>
+                        </tr>
+                        @endif
                     <tr>
                         <th>Sport</th>
                         <td>{{$event->typeOfSport->name}}</td>

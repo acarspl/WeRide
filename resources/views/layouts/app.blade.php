@@ -63,7 +63,7 @@
                                 <a class="px-3 btn btn-green-light nav-link text-white rhombus-right"  href="{{route('race.index')}}">Races</a>
                             </li>
                             <li class="nav-item  mt-3 mx-1 mt-md-0">
-                                <a class="px-3 btn btn-green-light nav-link text-white rhombus-right"  href="">Explore</a>
+                                <a class="px-3 btn btn-green-light nav-link text-white rhombus-right"  href="{{route('events.index')}}">Explore</a>
                             </li>
                             <li class="nav-item  mt-3 mx-1 mt-md-0">
                                 <a class="px-3 btn btn-green-light nav-link text-white rhombus-right"  href="{{route('events.my.index')}}">My Events</a>

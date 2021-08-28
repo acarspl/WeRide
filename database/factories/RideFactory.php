@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Ride;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -51,11 +52,19 @@ class RideFactory extends Factory
         });
     }
     public function withoutEndLocation()
+{
+    return $this->state(function (array $attributes) {
+        return [
+            'end_location_lat' => null,
+            'end_location_lng' => null,
+        ];
+    });
+}
+    public function byUser(User $user)
     {
-        return $this->state(function (array $attributes) {
+        return $this->state(function (array $attributes) use ($user) {
             return [
-                'end_location_lat' => null,
-                'end_location_lng' => null,
+                'user_id'=>$user->id,
             ];
         });
     }

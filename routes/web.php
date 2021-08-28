@@ -30,4 +30,5 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::get('/events/my',[\App\Http\Controllers\EventController::class,'indexMyEvents'])->name('events.my.index');
     Route::get('/race/{race}',[\App\Http\Controllers\RaceController::class,'show'])->name('race.show');
     Route::get('/ride/{ride}',[\App\Http\Controllers\RideController::class,'show'])->name('ride.show');
+    Route::get('/explore',[\App\Http\Controllers\EventController::class, 'index'])->name('events.index');
 });
