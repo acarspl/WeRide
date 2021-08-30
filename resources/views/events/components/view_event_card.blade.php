@@ -1,6 +1,6 @@
 <div class="card mt-2 mx-auto text-center">
     <div class="card-header bg-green mx-0  text-white">
-        <img class="mb-1" @if($event->isRace) src="{{asset('images/icons/map/race_flag.png')}}" alt="Race"  @else src="{{asset('images/logo/bike.png')}}" alt="Ride" @endif style="width: 20px" >
+        <img class="mb-1"  @if($event->isRace) src="{{asset('images/icons/map/race_flag.png')}}" alt="Race"  @else src="{{asset('images/logo/bike.png')}}" alt="Ride" @endif style="width: 20px" >
         <span class="font-weight-bold mx-2">{{$event->name}}</span> <span> {{\Carbon\Carbon::parse($event->start_time)->format('d-m-Y H:i')}}</span>
     </div>
     <div class="card-body">
@@ -9,6 +9,7 @@
                 @include('events.components.location_map', ['lat'=>$event->start_location_lat,'lng'=>$event->start_location_lng,'iteration'=>$loop,'height'=>300])
             </div>
             <div class="col-6 my-auto">
+                @include('events.components.join_event_button',['event'=>$event])
                 <table class="table table-sm ">
                     <tbody>
                     @if(\Illuminate\Support\Facades\Auth::id()!=$event->user_id)

@@ -20,6 +20,6 @@ class RidePolicy
         //
     }
     public function join(User $user, Ride $ride){
-        return $user->id !== $ride->user_id;
+        return $user->id !== $ride->user_id && !$user->doesParticipate($ride);
     }
 }

@@ -20,6 +20,6 @@ class RacePolicy
         //
     }
     public function join(User $user, Race $race){
-        return $user->id !== $race->user_id;
+        return $user->id !== $race->user_id && !$user->doesParticipate($race);
     }
 }

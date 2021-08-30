@@ -69,6 +69,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function participatedRides(){
         return $this->morphedByMany(Ride::class, 'participated','participants','participant_id','participated_id');
     }
+    public function participatedRacesActive(){
+        return $this->participatedRaces()->where('start_time','>=',Carbon::now())->get();
+    }
+    public function participatedRidesActive(){
+        return $this->participatedRides()->where('start_time','>=',Carbon::now())->get();
+    }
     public function doesParticipate($event){
         return $event->participants()->where('participant_id',$this->id)->count() === 1;
     }

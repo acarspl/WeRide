@@ -28,4 +28,7 @@ trait SportEventTrait{
     public function participants(){
         return $this->morphToMany(User::class,'participated','participants','participated_id','participant_id');
     }
+    public function doesUserParticipate(User $user){
+        return $this->participants()->where('participant_id',$user->id)->count() === 1;
+    }
 }

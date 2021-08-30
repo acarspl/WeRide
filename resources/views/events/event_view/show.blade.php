@@ -13,7 +13,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <div class="row">
                             <div class="col-12 font-weight-bold">
                                 Start Location
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         @if($event->startingPointMatchesFinish())
                             <div class="row mt-3">
                                 <h3 class="font-weight-bold col-12 mt-4 mb-4">
@@ -34,7 +34,7 @@
                             </div>
                             @endif
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-6 col-md-12 mx-auto">
                                 <div class="@if($event->startingPointMatchesFinish()) col-12 @else col-7  @endif mx-0 mb-1 px-0 bg-black mx-auto round-all-edges"  style="position: relative;">
                                     <img class="fadedImage round-all-edges" src="{{asset($event->typeOfSport->picture)}}" alt="{{$event->typeOfSport->name}}" style="width: 100%; position: relative">
                                     <h4 class="overlayTextCenter py-2 text-white text-center col-12">{{$event->typeOfSport->name}}</h4>
@@ -169,10 +169,10 @@
                                 @endif
                             </tbody>
                         </table>
+                        @include('events.components.join_event_button',['event'=>$event])
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     @endsection
