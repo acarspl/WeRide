@@ -16,8 +16,13 @@
                     <tbody>
                     @if(\Illuminate\Support\Facades\Auth::id()!=$event->user_id)
                         <tr>
-                            <th>Organiser</th>
-                            <td>{{$event->user->name}}</td>
+                            <th class="align-middle">Organiser</th>
+                            <td>
+                                @if(\Illuminate\Support\Facades\Storage::disk('public')->exists('avatars/'.$event->user_id.'.jpg'))
+                                    <img src="{{\Illuminate\Support\Facades\Storage::url('avatars/'.$event->user_id.'.jpg')}}" style="width: 40px" class="mx-1 rounded-circle" alt="Avatar">
+                                @endif
+                                {{$event->user->name}}
+                            </td>
                         </tr>
                         @endif
                     <tr>

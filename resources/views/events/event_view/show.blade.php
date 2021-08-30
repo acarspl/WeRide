@@ -179,14 +179,27 @@
                         <table class="table mt-1">
                             <tr id="me_participating_row" class="@if($event->doesUserParticipate(\Illuminate\Support\Facades\Auth::user())) d-table-row
                                  @else d-none @endif">
-                                <td class="font-italic">{{\Illuminate\Support\Facades\Auth::user()->name}}</td>
+                                <td class="font-italic">
+                                    @if(\Illuminate\Support\Facades\Storage::disk('public')->exists('avatars/'.\Illuminate\Support\Facades\Auth::id().'.jpg'))
+                                        <img src="{{\Illuminate\Support\Facades\Storage::url('avatars/'.\Illuminate\Support\Facades\Auth::id().'.jpg')}}" style="width: 45px" class="mx-1 rounded-circle" alt="Avatar">
+                                    @endif
+                                    {{\Illuminate\Support\Facades\Auth::user()->name}}</td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">{{$event->user->name}}</td>
+                                <td class="font-weight-bold">
+                                    @if(\Illuminate\Support\Facades\Storage::disk('public')->exists('avatars/'.$event->user_id.'.jpg'))
+                                        <img src="{{\Illuminate\Support\Facades\Storage::url('avatars/'.$event->user_id.'.jpg')}}" style="width: 45px" class="mx-1 rounded-circle" alt="Avatar">
+                                    @endif
+                                    {{$event->user->name}}</td>
                             </tr>
                             @foreach($participants as $participant)
                                 <tr>
-                                    <td> {{$participant}}</td>
+
+                                    <td>
+                                        @if(\Illuminate\Support\Facades\Storage::disk('public')->exists('avatars/'.$participant->id.'.jpg'))
+                                            <img src="{{\Illuminate\Support\Facades\Storage::url('avatars/'.$participant->id.'.jpg')}}" style="width: 45px" class="mx-1 rounded-circle" alt="Avatar">
+                                        @endif
+                                            {{$participant->name}}</td>
                                 </tr>
                                 @endforeach
                         </table>

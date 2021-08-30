@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        \Illuminate\Support\Facades\Storage::disk('public')->deleteDirectory('avatars');
         Schema::dropIfExists('users');
     }
 }

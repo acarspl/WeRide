@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateUserPreferencesRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use const http\Client\Curl\AUTH_ANY;
 
 class UserPreferencesController extends Controller
 {
@@ -24,6 +26,9 @@ class UserPreferencesController extends Controller
         }
         $preferences->location_lat = $request->validated()['start_location_lat'];
         $preferences->location_lng = $request->validated()['start_location_lng'];
+        if(isset($request->validated()['avatar'])){
+            $request->file('avatar')->storeAs('public/avatars',Auth::id().'.jpg');
+        }
         $preferences->save();
         return back();
     }

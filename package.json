@@ -22,6 +22,7 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
+        "bootstrap-fileinput": "^5.2.3",
         "leaflet": "^1.7.1"
     }
 }

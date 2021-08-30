@@ -27,6 +27,7 @@ class UpdateUserPreferencesRequest extends FormRequest
             'metric'=> 'nullable|string|in:on',
             'start_location_lat'=>'nullable|numeric|min:-90|max:90',
             'start_location_lng' =>'nullable|numeric|min:-180|max:180',
+            'avatar' => 'nullable|mimes:jpg,jpeg|dimensions:min_width=32,max_width=256,ratio:1',
         ];
     }
 }
