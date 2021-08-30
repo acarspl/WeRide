@@ -23,8 +23,7 @@ class RideController extends Controller
             $ride->end_location_lng = $request->get('start_location_lng');
         }
         $ride->save();
-        return back();
-        // @TODO TO redirect to view the ride
+        return redirect(route('ride.show',$ride));
 
     }
     public function show(Ride $ride){

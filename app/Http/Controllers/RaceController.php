@@ -24,8 +24,7 @@ class RaceController extends Controller
             $race->end_location_lng = $request->get('start_location_lng');
         }
         $race->save();
-        return back();
-        // @TODO TO redirect to view the ride
+        return redirect(route('race.show',$race));
     }
     public function show(Race $race){
         $event = $race;
