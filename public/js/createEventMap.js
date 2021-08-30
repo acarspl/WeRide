@@ -21,6 +21,17 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     zoomOffset: -1,
     accessToken: mapBoxToken,
 }).addTo(startMap);
+
+if(defaultLocationLat !== '' && defaultLocationLng !==''){
+    startMarker = L.marker([defaultLocationLat, defaultLocationLng],{
+        icon: startIcon,
+        draggable: true,
+    }).addTo(startMap);
+    updateField("start",[defaultLocationLat, defaultLocationLng]);
+    startMarker.on('dragend', function (e){
+        updateField("start",e.target.getLatLng());
+    });
+}
 startMap.on('click',function(e){
     if(!startMarker){
         startMarker = L.marker(e.latlng,{
@@ -32,39 +43,39 @@ startMap.on('click',function(e){
             updateField("start",e.target.getLatLng());
         });
     }
-
     else{
         startMarker.setLatLng(e.latlng);
         updateField("start",e.latlng);
     }
 });
+if(document.getElementById('end_location_map')!== null){
+    var endMap = L.map('end_location_map').setView([51.505, -0.09], 13);
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 17,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: mapBoxToken,
+    }).addTo(endMap);
+    endMap.on('click',function(e){
+        if(!endMarker){
+            endMarker = L.marker(e.latlng,{
+                icon: endIcon,
+                draggable: true,
+            }).addTo(endMap);
+            updateField("end",e.latlng);
+            endMarker.on('dragend', function (e){
+                updateField("end",e.target.getLatLng());
+            });
+        }
 
-var endMap = L.map('end_location_map').setView([51.505, -0.09], 13);
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 17,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: mapBoxToken,
-}).addTo(endMap);
-endMap.on('click',function(e){
-    if(!endMarker){
-        endMarker = L.marker(e.latlng,{
-            icon: endIcon,
-            draggable: true,
-        }).addTo(endMap);
-        updateField("end",e.latlng);
-        endMarker.on('dragend', function (e){
-            updateField("end",e.target.getLatLng());
-        });
-    }
-
-    else{
-        endMarker.setLatLng(e.latlng);
-        updateField("end",e.latlng);
-    }
-});
+        else{
+            endMarker.setLatLng(e.latlng);
+            updateField("end",e.latlng);
+        }
+    });
+}
 
 function updateField(field, coordinates){
     $('#'+field+'_location_lat').val(coordinates.lat);

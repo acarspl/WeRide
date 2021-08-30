@@ -188,6 +188,9 @@
     <script type="text/javascript">
         let mapBoxToken = "{{config('services.mapbox.token')}}";
         let metricUnits = true;
+        let defaultLocationLat = "{{\Illuminate\Support\Facades\Auth::user()->preferences->location_lat}}";
+        let defaultLocationLng = "{{\Illuminate\Support\Facades\Auth::user()->preferences->location_lng}}";
+        {{-- @TODO METRIC UNITS IMPLEMENTATION --}}
     </script>
     <script src="{{ asset('js/createEventMap.js') }}" ></script>
     <script src="{{ asset('js/createEventForm.js') }}" ></script>

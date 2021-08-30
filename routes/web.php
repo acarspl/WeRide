@@ -35,4 +35,7 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::post('/ride/{ride}/join',[\App\Http\Controllers\RideController::class,'join'])->name('ride.join')->middleware('can:join,ride');
     Route::delete('/race/{race}/leave',[\App\Http\Controllers\RaceController::class,'leave'])->name('race.leave')->middleware('can:leave,race');
     Route::delete('/ride/{ride}/leave',[\App\Http\Controllers\RideController::class,'leave'])->name('ride.leave')->middleware('can:leave,ride');
+
+    Route::get('/user/preferences',[\App\Http\Controllers\UserPreferencesController::class,'show'])->name('user.preferences.show');
+    Route::patch('/user/preferences',[\App\Http\Controllers\UserPreferencesController::class, 'update'])->name('user.preferences.update');
 });
