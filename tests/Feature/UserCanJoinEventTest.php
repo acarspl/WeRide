@@ -79,4 +79,28 @@ class UserCanJoinEventTest extends TestCase
         $response->assertStatus(403);
         $this->assertDatabaseCount('participants',0);
     }
+    public function test_verified_user_cannot_join_ride_if_max_users_reached()
+    {
+        $this->seed();
+        $user1 = User::factory()->create();
+        $user2= User::factory()->create();
+        $user3= User::factory()->create();
+        $ride = Ride::factory()->byUser($user1)->create(['max_users'=>3, 'going_outside_website'=>2]);
+        $this->actingAs($user2)->post('/ride/'.$ride->id.'/join');
+        $response = $this->actingAs($user3)->post('/ride/'.$ride->id.'/join');
+        $response->assertStatus(403);
+        $this->assertDatabaseCount('participants',1);
+    }
+    public function test_verified_user_cannot_join_race_if_max_users_reached()
+    {
+        $this->seed();
+        $user1 = User::factory()->create();
+        $user2= User::factory()->create();
+        $user3= User::factory()->create();
+        $race = Race::factory()->byUser($user1)->create(['max_users'=>2]);
+        $this->actingAs($user2)->post('/race/'.$race->id.'/join');
+        $response = $this->actingAs($user3)->post('/race/'.$race->id.'/join');
+        $response->assertStatus(403);
+        $this->assertDatabaseCount('participants',1);
+    }
 }
