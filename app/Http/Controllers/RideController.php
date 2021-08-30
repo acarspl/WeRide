@@ -35,4 +35,7 @@ class RideController extends Controller
     public function join(Ride $ride){
         return response()->json(['success'=>Auth::user()->joinRide($ride)]);
     }
+    public function leave(Ride $ride){
+        return response()->json(['success'=>Auth::user()->leaveRide($ride)]);
+    }
 }

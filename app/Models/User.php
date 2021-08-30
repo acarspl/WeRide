@@ -86,11 +86,17 @@ class User extends Authenticatable implements MustVerifyEmail
         return
             false;
     }
+    public function leaveRide(Ride $ride){
+        return $ride->participants()->where('participant_id',$this->id)->detach();
+    }
     public function joinRace(Race $race){
         if($race->user_id != $this->id){
             $this->participatedRaces()->save($race);
             return true;
         }
         return false;
+    }
+    public function leaveRace(Race $race){
+        return $race->participants()->where('participant_id',$this->id)->detach();
     }
 }

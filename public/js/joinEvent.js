@@ -28,6 +28,32 @@ function joinEvent(id, isRace){
     });
 }
 function leaveEvent(id, isRace){
-
+    let url ="";
+    if(isRace){
+        url = "/race/"+id+"/leave" ;
+    }
+    else{
+        url = "/ride/"+id+"/leave" ;
+    }
+    $.ajax({
+        type: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: url,
+        success: function(){
+            if(isRace){
+                $('#join_event_button_'+id+'_r').removeClass('d-none').addClass('d-block');
+                $('#leave_event_button_'+id+'_r').removeClass('d-block').addClass('d-none');
+            }
+            else{
+                $('#join_event_button_'+id).removeClass('d-none').addClass('d-block');
+                $('#leave_event_button_'+id).removeClass('d-block').addClass('d-none');
+            }
+        },
+        error: function (msg) {
+            alert("Something went wrong!")
+        }
+    });
 }
 

@@ -35,4 +35,7 @@ class RaceController extends Controller
     public function join(Race $race){
        return response()->json(['success'=>Auth::user()->joinRace($race)]);
     }
+    public function leave(Race $race){
+        return response()->json(['success'=>Auth::user()->leaveRace($race)]);
+    }
 }

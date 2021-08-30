@@ -33,4 +33,6 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::get('/explore',[\App\Http\Controllers\EventController::class, 'index'])->name('events.index');
     Route::post('/race/{race}/join',[\App\Http\Controllers\RaceController::class,'join'])->name('race.join')->middleware('can:join,race');
     Route::post('/ride/{ride}/join',[\App\Http\Controllers\RideController::class,'join'])->name('ride.join')->middleware('can:join,ride');
+    Route::delete('/race/{race}/leave',[\App\Http\Controllers\RaceController::class,'leave'])->name('race.leave')->middleware('can:leave,race');
+    Route::delete('/ride/{ride}/leave',[\App\Http\Controllers\RideController::class,'leave'])->name('ride.leave')->middleware('can:leave,ride');
 });
