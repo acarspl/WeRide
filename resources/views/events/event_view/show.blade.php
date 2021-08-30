@@ -127,6 +127,11 @@
                             </tr>
                             @endif
                             <tr>
+                                <th>Going</th>
+                                <td @if($event->isRace)id="number_of_participants_{{$event->id}}_r" @else id="number_of_participants_{{$event->id}}" @endif>
+                                    {{$event->numberOfParticipants()}}</td>
+                            </tr>
+                            <tr>
                                 <th>Max users</th>
                                 <td>{{$event->max_users}}</td>
                             </tr>
@@ -170,6 +175,22 @@
                             </tbody>
                         </table>
                         @include('events.components.join_event_button',['event'=>$event])
+                        <h4 class="mt-3">Going</h4>
+                        <table class="table mt-1">
+                            <tr id="me_participating_row" class="@if($event->doesUserParticipate(\Illuminate\Support\Facades\Auth::user())) d-table-row
+                                 @else d-none @endif">
+                                <td class="font-italic">{{\Illuminate\Support\Facades\Auth::user()->name}}</td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">{{$event->user->name}}</td>
+                            </tr>
+                            @foreach($participants as $participant)
+                                <tr>
+                                    <td> {{$participant}}</td>
+                                </tr>
+                                @endforeach
+                        </table>
+
                     </div>
                 </div>
             </div>

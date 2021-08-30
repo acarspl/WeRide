@@ -16,10 +16,15 @@ function joinEvent(id, isRace){
             if(isRace){
                 $('#join_event_button_'+id+'_r').removeClass('d-block').addClass('d-none');
                 $('#leave_event_button_'+id+'_r').removeClass('d-none').addClass('d-block');
+                $('#number_of_participants_'+id+'_r').text(parseInt($('#number_of_participants_'+id+'_r').text())+1);
             }
             else{
                 $('#join_event_button_'+id).removeClass('d-block').addClass('d-none');
                 $('#leave_event_button_'+id).removeClass('d-none').addClass('d-block');
+                $('#number_of_participants_'+id).text(parseInt($('#number_of_participants_'+id).text())+1);
+            }
+            if($('#me_participating_row')){
+                $('#me_participating_row').removeClass('d-none').addClass('d-table-row');
             }
         },
         error: function (msg) {
@@ -45,14 +50,19 @@ function leaveEvent(id, isRace){
             if(isRace){
                 $('#join_event_button_'+id+'_r').removeClass('d-none').addClass('d-block');
                 $('#leave_event_button_'+id+'_r').removeClass('d-block').addClass('d-none');
+                $('#number_of_participants_'+id+'_r').text(parseInt($('#number_of_participants_'+id+'_r').text())-1);
             }
             else{
                 $('#join_event_button_'+id).removeClass('d-none').addClass('d-block');
                 $('#leave_event_button_'+id).removeClass('d-block').addClass('d-none');
+                $('#number_of_participants_'+id).text(parseInt($('#number_of_participants_'+id).text())-1);
+            }
+            if($('#me_participating_row')){
+                $('#me_participating_row').removeClass('d-table-row').addClass('d-none');
             }
         },
-        error: function (msg) {
-            alert("Something went wrong!")
+        error: function () {
+            alert("You cannot leave the event!")
         }
     });
 }

@@ -29,8 +29,8 @@ class RaceController extends Controller
     }
     public function show(Race $race){
         $event = $race;
-        $event->isRace = true;
-        return view('events.event_view.show', compact('event'));
+        $participants = $race->participants()->where('participant_id', '!=',Auth::id())->pluck('name')->sortBy('name');
+        return view('events.event_view.show', compact(['event','participants']));
     }
     public function join(Race $race){
        return response()->json(['success'=>Auth::user()->joinRace($race)]);

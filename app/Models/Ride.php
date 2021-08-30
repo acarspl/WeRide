@@ -28,4 +28,7 @@ class Ride extends Model
     public static function indexActive(){
         return Ride::where('start_time','>=', Carbon::now())->get();
     }
+    public function numberOfParticipants(){
+        return $this->participants()->count() + $this->going_outside_website;
+    }
 }

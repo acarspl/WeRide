@@ -29,8 +29,8 @@ class RideController extends Controller
     }
     public function show(Ride $ride){
         $event = $ride;
-        $event->isRace = false;
-        return view('events.event_view.show', compact('event'));
+        $participants = $ride->participants()->where('participant_id', '!=',Auth::id())->pluck('name')->sortBy('name');
+        return view('events.event_view.show', compact(['event','participants']));
     }
     public function join(Ride $ride){
         return response()->json(['success'=>Auth::user()->joinRide($ride)]);

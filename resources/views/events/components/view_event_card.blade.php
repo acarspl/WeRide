@@ -70,6 +70,11 @@
                         </td>
                     </tr>
                     @endif
+                    <tr>
+                        <th>Going</th>
+                        <td @if($event->isRace)id="number_of_participants_{{$event->id}}_r" @else id="number_of_participants_{{$event->id}}" @endif>
+                            {{$event->numberOfParticipants()}}</td>
+                    </tr>
                     @if($event->isRace)
                         <th>Signing Fee</th>
                         <td>{{$event->price}}</td>

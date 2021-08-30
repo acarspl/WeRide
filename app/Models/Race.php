@@ -19,5 +19,8 @@ class Race extends Model
     public static function indexActive(){
         return Race::where('start_time','>=', Carbon::now())->get();
     }
+    public function numberOfParticipants(){
+        return $this->participants()->count() + 1;
+    }
 }
 
