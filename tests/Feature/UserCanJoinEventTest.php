@@ -23,7 +23,8 @@ class UserCanJoinEventTest extends TestCase
         $user1 = User::factory()->create();
         $user2= User::factory()->create();
         $ride = Ride::factory()->byUser($user1)->create();
-        $this->assertTrue($user2->joinRide($ride));
+        $response = $this->actingAs($user2)->post('/ride/'.$ride->id.'/join');
+        $response->assertJson(['success'=>true])->assertStatus(200);
         $this->assertDatabaseCount('participants',1);
         $this->assertTrue($user2->participatedRides->first()->id == $ride->id);
 
@@ -34,7 +35,8 @@ class UserCanJoinEventTest extends TestCase
         $user1 = User::factory()->create();
         $user2= User::factory()->create();
         $race = Race::factory()->byUser($user1)->create();
-        $this->assertTrue($user2->joinRace($race));
+        $response = $this->actingAs($user2)->post('/race/'.$race->id.'/join');
+        $response->assertJson(['success'=>true])->assertStatus(200);
         $this->assertDatabaseCount('participants',1);
         $this->assertTrue($user2->participatedRaces->first()->id == $race->id);
     }
@@ -43,7 +45,8 @@ class UserCanJoinEventTest extends TestCase
         $this->seed();
         $user1 = User::factory()->create();
         $ride = Ride::factory()->byUser($user1)->create();
-        $this->assertFalse($user1->joinRide($ride));
+        $response = $this->actingAs($user1)->post('/ride/'.$ride->id.'/join');
+        $response->assertJson(['success'=>false]);
         $this->assertDatabaseCount('participants',0);
     }
     public function test_verified_user_cannot_join_own_race()
@@ -51,7 +54,8 @@ class UserCanJoinEventTest extends TestCase
         $this->seed();
         $user1 = User::factory()->create();
         $race = Race::factory()->byUser($user1)->create();
-        $this->assertFalse($user1->joinRace($race));
+        $response = $this->actingAs($user1)->post('/race/'.$race->id.'/join');
+        $response->assertJson(['success'=>false]);
         $this->assertDatabaseCount('participants',0);
     }
 }

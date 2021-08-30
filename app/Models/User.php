@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\SportEventTrait;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -67,6 +68,9 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function participatedRides(){
         return $this->morphedByMany(Ride::class, 'participated','participants','participant_id','participated_id');
+    }
+    public function doesParticipate($event){
+        return $event->participants()->where('participant_id',$this->id)->count() === 1;
     }
     public function joinRide(Ride $ride){
         if($ride->user_id != $this->id){

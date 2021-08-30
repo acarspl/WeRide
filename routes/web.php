@@ -31,4 +31,6 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::get('/race/{race}',[\App\Http\Controllers\RaceController::class,'show'])->name('race.show');
     Route::get('/ride/{ride}',[\App\Http\Controllers\RideController::class,'show'])->name('ride.show');
     Route::get('/explore',[\App\Http\Controllers\EventController::class, 'index'])->name('events.index');
+    Route::post('/race/{race}/join',[\App\Http\Controllers\RaceController::class,'join'])->name('race.join')->middleware('can:join,race');
+    Route::post('/ride/{ride}/join',[\App\Http\Controllers\RideController::class,'join'])->name('ride.join')->middleware('can:join,ride');
 });

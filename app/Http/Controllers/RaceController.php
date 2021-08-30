@@ -32,4 +32,7 @@ class RaceController extends Controller
         $event->isRace = true;
         return view('events.event_view.show', compact('event'));
     }
+    public function join(Race $race){
+       return response()->json(['success'=>Auth::user()->joinRace($race)]);
+    }
 }
