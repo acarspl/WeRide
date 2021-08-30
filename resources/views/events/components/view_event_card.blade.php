@@ -9,7 +9,9 @@
                 @include('events.components.location_map', ['lat'=>$event->start_location_lat,'lng'=>$event->start_location_lng,'iteration'=>$loop,'height'=>300])
             </div>
             <div class="col-6 my-auto">
+                @if(strpos($loop,'j') === false)
                 @include('events.components.join_event_button',['event'=>$event])
+                @endif
                 <table class="table table-sm ">
                     <tbody>
                     @if(\Illuminate\Support\Facades\Auth::id()!=$event->user_id)

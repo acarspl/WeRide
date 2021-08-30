@@ -12,8 +12,11 @@ class EventController extends Controller
     public function indexMyEvents(){
         $races = Auth::user()->activeRaces();
         $rides = Auth::user()->activeRides();
+        $races_joined = Auth::user()->participatedRacesActive();
+        $rides_joined  = Auth::user()->participatedRidesActive();
         $events = $races->concat($rides)->sortBy('start_time');
-        return view('events.event_view.index_my', compact('events'));
+        $events_joined = $races_joined->concat($rides_joined)->sortBy('start_time');
+        return view('events.event_view.index_my', compact(['events', 'events_joined']));
     }
     public function index(){
         $races = Race::indexActive();
