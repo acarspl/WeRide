@@ -43,6 +43,6 @@ class Ride extends Model
             ['start_location_lng','>=',$lngSW],
             ['start_location_lat','<=',$latNE],
             ['start_location_lng','<=',$lngNE],
-        ])->get();
+        ])->with('user:id,name','typeOfSport:id,name')->get();
     }
 }

@@ -2,6 +2,7 @@
 </div>
 <script type="text/javascript">
     mapBoxToken = '{{config('services.mapbox.token')}}';
+    metricUnits = '{{Auth::user()->preferences->metric}}';
     lat = '{{\Illuminate\Support\Facades\Auth::user()->preferences->location_lat}}';
     lng = '{{\Illuminate\Support\Facades\Auth::user()->preferences->location_lng}}';
     </script>
