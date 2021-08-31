@@ -19,22 +19,8 @@ class Race extends Model
     public function getIsRaceAttribute(){
         return true;
     }
-
-    public static function indexActive(){
-        return Race::where('start_time','>=', Carbon::now())->get();
-    }
     public function numberOfParticipants(){
         return $this->participants()->count() + 1;
-    }
-    public static function getActiveRacesWithinBounds($latSW, $lngSW, $latNE, $lngNE, User $user){
-        return Race::where([
-            ['user_id','!=', $user->id],
-            ['start_time','>=', Carbon::now()],
-            ['start_location_lat','>=',$latSW],
-            ['start_location_lng','>=',$lngSW],
-            ['start_location_lat','<=',$latNE],
-            ['start_location_lng','<=',$lngNE],
-        ])->with('user:id,name','typeOfSport:id,name')->get();
     }
 }
 

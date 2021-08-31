@@ -26,9 +26,9 @@ class EventController extends Controller
         return view('events.event_view.index',compact('events'));
     }
     public function indexWithinBounds(GetEventsWithinBoundsRequest $request){
-        $races = Race::getActiveRacesWithinBounds($request->validated()['latSW'],$request->validated()['lngSW'], $request->validated()['latNE'],
+        $races = Race::getActiveWithinBounds($request->validated()['latSW'],$request->validated()['lngSW'], $request->validated()['latNE'],
             $request->validated()['lngNE'],Auth::user());
-        $rides = Ride::getActiveRidesWithinBounds($request->validated()['latSW'],$request->validated()['lngSW'], $request->validated()['latNE'],
+        $rides = Ride::getActiveWithinBounds($request->validated()['latSW'],$request->validated()['lngSW'], $request->validated()['latNE'],
             $request->validated()['lngNE'],Auth::user());
         return $races->concat($rides);
     }

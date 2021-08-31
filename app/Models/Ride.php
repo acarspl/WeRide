@@ -29,20 +29,7 @@ class Ride extends Model
     public static function calculateAverageSpeed($min, $max){
         return ($min+$max)/2;
     }
-    public static function indexActive(){
-        return Ride::where('start_time','>=', Carbon::now())->get();
-    }
     public function numberOfParticipants(){
         return $this->participants()->count() + $this->going_outside_website;
-    }
-    public static function getActiveRidesWithinBounds($latSW, $lngSW, $latNE, $lngNE, User $user){
-        return Ride::where([
-            ['user_id','!=', $user->id],
-            ['start_time','>=', Carbon::now()],
-            ['start_location_lat','>=',$latSW],
-            ['start_location_lng','>=',$lngSW],
-            ['start_location_lat','<=',$latNE],
-            ['start_location_lng','<=',$lngNE],
-        ])->with('user:id,name','typeOfSport:id,name')->get();
     }
 }

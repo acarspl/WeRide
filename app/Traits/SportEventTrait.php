@@ -1,7 +1,9 @@
 <?php
 namespace App\Traits;
+use App\Models\Race;
 use App\Models\TypeOfSport;
 use App\Models\User;
+use Carbon\Carbon;
 
 trait SportEventTrait{
     public function user(){
@@ -30,5 +32,18 @@ trait SportEventTrait{
     }
     public function doesUserParticipate(User $user){
         return $this->participants()->where('participant_id',$user->id)->count() === 1;
+    }
+    public static function getActiveWithinBounds($latSW, $lngSW, $latNE, $lngNE, User $user){
+        return parent::where([
+            ['user_id','!=', $user->id],
+            ['start_time','>=', Carbon::now()],
+            ['start_location_lat','>=',$latSW],
+            ['start_location_lng','>=',$lngSW],
+            ['start_location_lat','<=',$latNE],
+            ['start_location_lng','<=',$lngNE],
+        ])->with('user:id,name','typeOfSport:id,name')->get();
+    }
+    public static function indexActive(){
+        return parent::where('start_time','>=', Carbon::now())->get();
     }
 }
