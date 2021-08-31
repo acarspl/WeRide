@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GetEventsWithinBoundsRequest;
 use App\Models\Race;
 use App\Models\Ride;
 use Illuminate\Http\Request;
@@ -23,5 +24,12 @@ class EventController extends Controller
         $rides = Ride::indexActive();
         $events = $races->concat($rides)->sortBy('start_time')->where('user_id','!=',Auth::id());
         return view('events.event_view.index',compact('events'));
+    }
+    public function indexWithinBounds(GetEventsWithinBoundsRequest $request){
+        $races = Race::getActiveRacesWithinBounds($request->validated()['latSW'],$request->validated()['lngSW'], $request->validated()['latNE'],
+            $request->validated()['lngNE'],Auth::user());
+        $rides = Ride::getActiveRidesWithinBounds($request->validated()['latSW'],$request->validated()['lngSW'], $request->validated()['latNE'],
+            $request->validated()['lngNE'],Auth::user());
+        return $races->concat($rides);
     }
 }

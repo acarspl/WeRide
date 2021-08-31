@@ -15,7 +15,11 @@ class Ride extends Model
     public $table = 'rides';
     protected $guarded = ['id','user_id'];
     protected $casts = ['start_time' => 'datetime', 'end_time'=> 'datetime','signing_deadline'=>'datetime'];
-    public $isRace =false;
+
+    protected $appends = ['isRace'];
+    public function getIsRaceAttribute(){
+        return false;
+    }
 
     public function calculateEndTime(){
         $start_time = Carbon::parse($this->start_time);
@@ -30,5 +34,15 @@ class Ride extends Model
     }
     public function numberOfParticipants(){
         return $this->participants()->count() + $this->going_outside_website;
+    }
+    public static function getActiveRidesWithinBounds($latSW, $lngSW, $latNE, $lngNE, User $user){
+        return Ride::where([
+            ['user_id','!=', $user->id],
+            ['start_time','>=', Carbon::now()],
+            ['start_location_lat','>=',$latSW],
+            ['start_location_lng','>=',$lngSW],
+            ['start_location_lat','<=',$latNE],
+            ['start_location_lng','<=',$lngNE],
+        ])->get();
     }
 }
