@@ -52,7 +52,6 @@ function loadEvents(latSW, lngSW, latNE, lngNE){
     });
 }
 function displayEventsOnMap(newEvents){
-    console.log(newEvents);
     for(let i=0; i<eventsMarkers.length; i++){
         eventsMarkers[i].remove();
     }
