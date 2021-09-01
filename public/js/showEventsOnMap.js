@@ -7,7 +7,7 @@ let rideIcon = L.icon({
     iconSize: [40,40],
 });
 
-var eventMap = L.map('eventMap').setView([51.505, -0.09], 13);
+var eventMap = L.map('eventMap').setView([defaultLocationLat, defaultLocationLng], 11);
 let eventsMarkers=[];
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {

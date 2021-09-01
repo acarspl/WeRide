@@ -4,7 +4,7 @@
 <script type="text/javascript">
     mapBoxToken = '{{config('services.mapbox.token')}}';
     metricUnits = '{{Auth::user()->preferences->metric}}';
-    lat = '{{\Illuminate\Support\Facades\Auth::user()->preferences->location_lat}}';
-    lng = '{{\Illuminate\Support\Facades\Auth::user()->preferences->location_lng}}';
+    defaultLocationLat = '{{\Illuminate\Support\Facades\Auth::user()->preferences->location_lat}}';
+    defaultLocationLng = '{{\Illuminate\Support\Facades\Auth::user()->preferences->location_lng}}';
     </script>
 <script type="text/javascript" src="{{asset('js/showEventsOnMap.js')}}"></script>

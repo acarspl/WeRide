@@ -21,8 +21,8 @@ class CreateUserPreferencesTable extends Migration
                 $table->boolean($sport)->default(true);
             }
             $table->boolean('metric')->default(true);
-            $table->double('location_lat')->nullable();
-            $table->double('location_lng')->nullable();
+            $table->double('location_lat')->default(51.505);
+            $table->double('location_lng')->default(-0.09);
             $table->timestamps();
         });
     }
