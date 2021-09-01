@@ -26,6 +26,9 @@ $(window).on('load', function() {
     loadEventsInScope();
 });
 function loadEventsInScope(){
+    if($("#filterForm").validate().valid()===false){
+        return false;
+    }
     let bounds = eventMap.getBounds();
     // check if all popups are closed
     for(let i=0; i<eventsMarkers.length; i++){
@@ -48,13 +51,23 @@ function loadEvents(latSW, lngSW, latNE, lngNE){
             "latSW": latSW,
             "lngSW": lngSW,
             "latNE": latNE,
-            "lngNE": lngNE
+            "lngNE": lngNE,
+            "is_race": $('#is_race').val(),
+            'sport_type': $('#sport_type').val(),
+            "start_time_from": $('#start_time_from').val(),
+            'start_time_to': $('#start_time_to').val(),
+            "speed_from": $('#speed_from').val(),
+            'speed_to': $('#speed_to').val(),
+            "distance_from": $('#distance_from').val(),
+            "distance_to": $('#distance_to').val(),
+            "elevation_from": $('#elevation_from').val(),
+            "elevation_to": $('#elevation_to').val(),
+
         },
         success: function(data){
             displayEventsOnMap(data);
         },
         error: function (msg) {
-            alert("Something went wrong!")
         }
     });
 }
@@ -128,3 +141,8 @@ function getPopupContent(event){
 `;
 }
 
+// FILTERS
+
+$('.filterInput').on('change', function () {
+    loadEventsInScope();
+});

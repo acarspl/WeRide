@@ -41,7 +41,28 @@ trait SportEventTrait{
             ['start_location_lng','>=',$lngSW],
             ['start_location_lat','<=',$latNE],
             ['start_location_lng','<=',$lngNE],
-        ])->with('user:id,name','typeOfSport:id,name')->get();
+        ])->with('user:id,name','typeOfSport:id,name');
+    }
+    public function scopeStartTime($query, $operator, $dateTime){
+            return $query->where('start_time',$operator,$dateTime);
+    }
+    public function scopeDistance($query, $operator, $distance){
+        return $query->where('distance',$operator,$distance);
+    }
+    public function scopeElevation($query, $operator, $elevation){
+        return $query->where('elevation',$operator,$elevation);
+    }
+    public function scopeSportType($query, $type){
+        if($type==0){ // show all types
+            return $query->where('sport_type_id','>',$type);
+        }
+        return $query->where('sport_type_id',$type);
+    }
+    public function scopeSpeedLessThan($query, $speed){
+            return $query->where('speed_min', '<=', $speed);
+    }
+    public function scopeSpeedMoreThan($query, $speed){
+            return $query->where('speed_max', '>=', $speed);
     }
     public static function indexActive(){
         return parent::where('start_time','>=', Carbon::now())->get();

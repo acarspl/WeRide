@@ -25,11 +25,27 @@ class EventController extends Controller
         $events = $races->concat($rides)->sortBy('start_time')->where('user_id','!=',Auth::id());
         return view('events.event_view.index',compact('events'));
     }
-    public function indexWithinBounds(GetEventsWithinBoundsRequest $request){
-        $races = Race::getActiveWithinBounds($request->validated()['latSW'],$request->validated()['lngSW'], $request->validated()['latNE'],
-            $request->validated()['lngNE'],Auth::user());
-        $rides = Ride::getActiveWithinBounds($request->validated()['latSW'],$request->validated()['lngSW'], $request->validated()['latNE'],
-            $request->validated()['lngNE'],Auth::user());
+    public function indexWithinBounds(GetEventsWithinBoundsRequest $request){ // with filters
+        $request = $request->process();
+        $races = collect();
+        $rides = collect();
+        if($request['is_race'] != 1) {
+            $races = Race::getActiveWithinBounds($request['latSW'], $request['lngSW'], $request['latNE'],
+                $request['lngNE'], Auth::user())->sportType($request['sport_type'])
+                ->startTime('>=', $request['start_time_from'])->startTime('<=', $request['start_time_to'])
+                ->distance('>=', $request['distance_from'])->distance('<=', $request['distance_to'])
+                ->elevation('>=', $request['elevation_from'])->elevation('<=', $request['elevation_to'])
+                ->take(200)->get();
+        }
+        if($request['is_race'] != 2) {
+            $rides = Ride::getActiveWithinBounds($request['latSW'], $request['lngSW'], $request['latNE'],
+                $request['lngNE'], Auth::user())->sportType($request['sport_type'])
+                ->startTime('>=', $request['start_time_from'])->startTime('<=', $request['start_time_to'])
+                ->distance('>=', $request['distance_from'])->distance('<=', $request['distance_to'])
+                ->elevation('>=', $request['elevation_from'])->elevation('<=', $request['elevation_to'])
+                ->speedLessThan($request['speed_to'])->speedMoreThan($request['speed_from'])
+                ->take(200)->get();
+        }
         return $races->concat($rides);
     }
 }

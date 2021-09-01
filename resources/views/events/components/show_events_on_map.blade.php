@@ -1,5 +1,6 @@
 <div id="eventMap" style="height: 600px">
 </div>
+@include('events.components.filter_events')
 <script type="text/javascript">
     mapBoxToken = '{{config('services.mapbox.token')}}';
     metricUnits = '{{Auth::user()->preferences->metric}}';
