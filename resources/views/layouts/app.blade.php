@@ -12,6 +12,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script src="{{asset('js/plugins/jQueryCookies.js')}}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -116,6 +117,10 @@
         <main>
             @yield('content')
         </main>
+        {{--GEOLOCATION--}}
+        @auth
+            <script src="{{ asset('js/geoLocation.js') }}"></script>
+        @endauth
     </div>
 </body>
 </html>

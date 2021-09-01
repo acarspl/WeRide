@@ -38,6 +38,7 @@ Route::middleware(['auth','verified'])->group(function(){
 
     Route::get('/user/preferences',[\App\Http\Controllers\UserPreferencesController::class,'show'])->name('user.preferences.show');
     Route::patch('/user/preferences',[\App\Http\Controllers\UserPreferencesController::class, 'update'])->name('user.preferences.update');
+    Route::patch('/user/preferences/location',[\App\Http\Controllers\UserPreferencesController::class, 'updateLocation'])->name('user.preferences.update.location');
 
     Route::get('/events/bounds',[\App\Http\Controllers\EventController::class,'indexWithinBounds'])->name('events.in.bounds');
 });

@@ -32,4 +32,11 @@ class UserPreferencesController extends Controller
         $preferences->save();
         return back();
     }
+    public function updateLocation(UpdateUserPreferencesRequest $request){
+        $preferences = Auth::user()->preferences;
+        $preferences->location_lat = $request->validated()['start_location_lat'];
+        $preferences->location_lng = $request->validated()['start_location_lng'];
+        $preferences->save();
+        return true;
+    }
 }
