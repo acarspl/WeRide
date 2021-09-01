@@ -130,7 +130,7 @@ function getPopupContent(event){
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <a type="button" class="btn btn-success btn-block link-as-text" ${event.isRace? "href='/race/"+event.id+"'" : "href='/ride/"+event.id+"'"}>Details</a>
+                            <a type="button" target="_blank" class="btn btn-success btn-block link-as-text" ${event.isRace? "href='/race/"+event.id+"'" : "href='/ride/"+event.id+"'"}>Details</a>
                         </td>
                     </tr>
 
