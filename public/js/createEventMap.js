@@ -27,7 +27,7 @@ if(defaultLocationLat !== '' && defaultLocationLng !==''){
         icon: startIcon,
         draggable: true,
     }).addTo(startMap);
-    updateField("start",[defaultLocationLat, defaultLocationLng]);
+    updateField("start",{lat: defaultLocationLat, lng: defaultLocationLng});
     startMarker.on('dragend', function (e){
         updateField("start",e.target.getLatLng());
     });
@@ -48,8 +48,20 @@ startMap.on('click',function(e){
         updateField("start",e.latlng);
     }
 });
+
+function updateField(field, coordinates){
+    $('#'+field+'_location_lat').val(coordinates.lat);
+    $('#'+field+'_location_lng').val(coordinates.lng);
+}
+
+// END MAP
 if(document.getElementById('end_location_map')!== null){
-    var endMap = L.map('end_location_map').setView([defaultLocationLat, defaultLocationLng], 13);
+    if(endLocationLat != null && endLocationLng !=null){
+        var endMap = L.map('end_location_map').setView([endLocationLat, endLocationLng], 13);
+    }
+    else{
+        var endMap = L.map('end_location_map').setView([defaultLocationLat, defaultLocationLng], 13);
+    }
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 17,
@@ -69,17 +81,27 @@ if(document.getElementById('end_location_map')!== null){
                 updateField("end",e.target.getLatLng());
             });
         }
-
         else{
             endMarker.setLatLng(e.latlng);
             updateField("end",e.latlng);
         }
     });
-}
-
-function updateField(field, coordinates){
-    $('#'+field+'_location_lat').val(coordinates.lat);
-    $('#'+field+'_location_lng').val(coordinates.lng);
+    if(defaultLocationLat !== '' && defaultLocationLng !==''){
+        if(defaultLocationLat != endLocationLat && defaultLocationLng != endLocationLng){
+            $("#round_trip_button").removeClass('btn-success').addClass('btn-outline-success').text("One Way Trip");
+            $("#end_location").removeClass('d-none');
+            endMap.invalidateSize();
+            isRoundTrip = false;
+            endMarker = L.marker([endLocationLat, endLocationLng],{
+                icon: endIcon,
+                draggable: true,
+            }).addTo(endMap);
+            updateField("end",{lat: endLocationLat, lng: endLocationLng});
+            endMarker.on('dragend', function (e){
+                updateField("end",e.target.getLatLng());
+            });
+        }
+    }
 }
 
 $("#round_trip_button").on('click',function(){
@@ -93,6 +115,7 @@ $("#round_trip_button").on('click',function(){
         $("#round_trip_button").removeClass('btn-outline-success').addClass('btn-success').text("Round Trip");
         $('#end_location_lat').val('');
         $('#end_location_lng').val('');
+        if(endMarker)
         endMarker.remove();
         endMarker = false;
         $("#end_location").addClass('d-none');

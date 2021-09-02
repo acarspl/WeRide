@@ -24,8 +24,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/race',[\App\Http\Controllers\RaceController::class, 'index'])->name('race.index');
 Route::middleware(['auth','verified'])->group(function(){
     Route::get('/race/create',[\App\Http\Controllers\RaceController::class, 'create'])->name('race.create');
+    Route::get('/race/{race}/edit',[\App\Http\Controllers\RaceController::class,'edit'])->name('race.edit')->middleware('can:edit,race');
+    Route::patch('/race/{race}',[\App\Http\Controllers\RaceController::class,'update'])->name('race.update')->middleware('can:edit,race');
     Route::post('/race',[\App\Http\Controllers\RaceController::class, 'store'])->name('race.store');
     Route::get('/ride/create',[\App\Http\Controllers\RideController::class, 'create'])->name('ride.create');
+    Route::get('/ride/{ride}/edit',[\App\Http\Controllers\RideController::class,'edit'])->name('ride.edit')->middleware('can:edit,ride');
+    Route::patch('/ride/{ride}',[\App\Http\Controllers\RideController::class,'update'])->name('ride.update')->middleware('can:edit,ride');
     Route::post('/ride',[\App\Http\Controllers\RideController::class, 'store'])->name('ride.store');
     Route::get('/events/my',[\App\Http\Controllers\EventController::class,'indexMyEvents'])->name('events.my.index');
     Route::get('/race/{race}',[\App\Http\Controllers\RaceController::class,'show'])->name('race.show');

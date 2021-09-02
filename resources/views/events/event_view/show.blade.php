@@ -7,7 +7,7 @@
                 <img class="mb-2 mt-2" @if($event->isRace) src="{{asset('images/icons/map/race_flag.png')}}" alt="Race"  @else src="{{asset('images/logo/bike.png')}}" alt="Ride" @endif style="width: 20px" >
                 <span class="font-weight-bold mx-2 ">{{$event->name}}</span>
                 @if($event->user_id == Auth::id())
-                    <a class="btn btn-primary float-right" type="button" href="#">
+                    <a class="btn btn-primary float-right" type="button" href=" @if($event->isRace) {{route('race.edit', $event)}} @else {{route('ride.edit', $event)}} @endif ">
                         &#128295; Edit</a>
                     @endif
             </div>

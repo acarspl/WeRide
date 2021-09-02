@@ -28,4 +28,7 @@ class RacePolicy
     public function leave(User $user, Race $race){
         return $user->doesParticipate($race) && $race->start_time >= Carbon::now();
     }
+    public function edit(User $user, Race $race){
+        return $user->id === $race->user_id;
+    }
 }

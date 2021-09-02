@@ -43,6 +43,12 @@ trait SportEventTrait{
             ['start_location_lng','<=',$lngNE],
         ])->with('user:id,name','typeOfSport:id,name');
     }
+    public static function indexActive(){
+        return parent::where('start_time','>=', Carbon::now())->get();
+    }
+    public function isRoundTrip(){
+        return ($this->start_location_lat===$this->end_location_lat) && ($this->start_location_lng === $this->end_location_lng);
+    }
     public function scopeStartTime($query, $operator, $dateTime){
             return $query->where('start_time',$operator,$dateTime);
     }
@@ -63,8 +69,5 @@ trait SportEventTrait{
     }
     public function scopeSpeedMoreThan($query, $speed){
             return $query->where('speed_max', '>=', $speed);
-    }
-    public static function indexActive(){
-        return parent::where('start_time','>=', Carbon::now())->get();
     }
 }

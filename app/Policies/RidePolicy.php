@@ -27,4 +27,7 @@ class RidePolicy
     public function leave(User $user, Ride $ride){
         return $user->doesParticipate($ride) && $ride->start_time >= Carbon::now();
     }
+    public function edit(User $user, Ride $ride){
+        return $user->id === $ride->user_id;
+    }
 }

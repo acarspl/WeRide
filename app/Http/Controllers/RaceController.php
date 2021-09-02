@@ -10,7 +10,7 @@ class RaceController extends Controller
 {
     public function create(){
         $isRace = true;
-        return view('event_management.create_event',compact('isRace'));
+        return view('event_management.manage_event',compact('isRace'));
     }
     public function index(){
         return view('event_management.race.index');
@@ -36,5 +36,19 @@ class RaceController extends Controller
     }
     public function leave(Race $race){
         return response()->json(['success'=>Auth::user()->leaveRace($race)]);
+    }
+    public function edit(Race $race){
+        $isRace = true;
+        $event = $race;
+        return view('event_management.manage_event',compact('isRace','event'));
+    }
+    public function update(StoreRaceRequest $request, Race $race){
+        $race->fill($request->validated());
+        if((is_null($request->get('end_location_lat')) && is_null($request->get('end_location_lng')))){
+            $race->end_location_lat = $request->get('start_location_lat');
+            $race->end_location_lng = $request->get('start_location_lng');
+        }
+        $race->save();
+        return redirect(route('race.show',$race));
     }
 }
