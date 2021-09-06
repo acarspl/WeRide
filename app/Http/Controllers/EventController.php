@@ -46,6 +46,10 @@ class EventController extends Controller
                 ->speedLessThan($request['speed_to'])->speedMoreThan($request['speed_from'])
                 ->take(200)->get();
         }
-        return $races->concat($rides);
+        $events = $races->concat($rides);
+        foreach ($events as $event){
+            $event->number_of_participants = $event->numberOfParticipants();
+        }
+        return $events;
     }
 }

@@ -115,6 +115,10 @@ function getPopupContent(event){
                         <td>${start_date_time.toLocaleDateString()+" "+start_date_time.toTimeString().substr(0, 5)}</td>
                     </tr>
                     <tr>
+                        <th>Going</th>
+                        <td>${event.number_of_participants}</td>
+                    </tr>
+                    <tr>
                         <th>Distance</th>
                         <td>
                             ${metricUnits==true?

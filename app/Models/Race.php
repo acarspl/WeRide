@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Interfaces\CountPeople;
 use App\Traits\SportEventTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Race extends Model
+class Race extends Model implements CountPeople
 {
     use HasFactory;
     use SportEventTrait;
