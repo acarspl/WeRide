@@ -66,6 +66,7 @@ function loadEvents(latSW, lngSW, latNE, lngNE){
         },
         success: function(data){
             displayEventsOnMap(data);
+            showEventsInCards(data);
         },
         error: function (msg) {
         }
