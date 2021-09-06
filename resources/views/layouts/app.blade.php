@@ -61,10 +61,10 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         @auth
-                            <li class="nav-item  mt-3 mx-1 mt-md-0">
+                            <li class="nav-item  mt-3 mx-1 mt-md-0 py-0 py-md-3 py-lg-0">
                                 <a class="px-3 btn btn-green-light nav-link text-white rhombus-right"  href="{{route('race.index')}}">Races</a>
                             </li>
-                            <li class="nav-item  mt-3 mx-1 mt-md-0">
+                            <li class="nav-item  mt-3 mx-1 mt-md-0  py-0 py-md-3 py-lg-0">
                                 <a class="px-3 btn btn-green-light nav-link text-white rhombus-right"  href="{{route('events.index')}}">Explore</a>
                             </li>
                             <li class="nav-item  mt-3 mx-1 mt-md-0">
@@ -88,7 +88,7 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown  py-0 py-md-3 py-lg-0">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-white mt-3 mt-md-0 text-center" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     @if(\Illuminate\Support\Facades\Storage::disk('public')->exists('avatars/'.\Illuminate\Support\Facades\Auth::id().'.jpg'))
                                   <img src="{{\Illuminate\Support\Facades\Storage::url('avatars/'.\Illuminate\Support\Facades\Auth::id().'.jpg')}}" style="width: 30px" class="mx-1 rounded-circle" alt="Avatar">
