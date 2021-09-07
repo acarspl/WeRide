@@ -31,4 +31,7 @@ class RacePolicy
     public function edit(User $user, Race $race){
         return $user->id === $race->user_id;
     }
+    public function destroy(User $user, Race $race){
+        return $user->id === (int)$race->user_id;
+    }
 }

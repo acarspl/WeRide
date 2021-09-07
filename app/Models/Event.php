@@ -72,4 +72,10 @@ abstract class Event extends Model
         return $query->where('speed_max', '>=', $speed);
     }
     public abstract function numberOfParticipants():int;
+
+    public function removeAllParticipants(){
+            foreach($this->participants as $participant) {
+                $participant->detach();
+            }
+    }
 }

@@ -13,16 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'welcome']);
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
-
 Route::get('/race',[\App\Http\Controllers\RaceController::class, 'index'])->name('race.index');
 Route::middleware(['auth','verified'])->group(function(){
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/race/create',[\App\Http\Controllers\RaceController::class, 'create'])->name('race.create');
     Route::get('/race/{race}/edit',[\App\Http\Controllers\RaceController::class,'edit'])->name('race.edit')->middleware('can:edit,race');
     Route::patch('/race/{race}',[\App\Http\Controllers\RaceController::class,'update'])->name('race.update')->middleware('can:edit,race');
@@ -39,6 +36,8 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::post('/ride/{ride}/join',[\App\Http\Controllers\RideController::class,'join'])->name('ride.join')->middleware('can:join,ride');
     Route::delete('/race/{race}/leave',[\App\Http\Controllers\RaceController::class,'leave'])->name('race.leave')->middleware('can:leave,race');
     Route::delete('/ride/{ride}/leave',[\App\Http\Controllers\RideController::class,'leave'])->name('ride.leave')->middleware('can:leave,ride');
+    Route::delete('/ride/{ride}',[\App\Http\Controllers\RideController::class,'destroy'])->name('ride.destroy')->middleware('can:destroy,ride');
+    Route::delete('/race/{race}',[\App\Http\Controllers\RaceController::class,'destroy'])->name('race.destroy')->middleware('can:destroy,race');
 
     Route::get('/user/preferences',[\App\Http\Controllers\UserPreferencesController::class,'show'])->name('user.preferences.show');
     Route::patch('/user/preferences',[\App\Http\Controllers\UserPreferencesController::class, 'update'])->name('user.preferences.update');

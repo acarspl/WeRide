@@ -51,4 +51,9 @@ class RaceController extends Controller
         $race->save();
         return redirect(route('race.show',$race));
     }
+    public function destroy(Race $race){
+        $race->participants()->detach();
+        $race->delete();
+        return redirect(route('events.my.index'));
+    }
 }

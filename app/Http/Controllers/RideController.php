@@ -51,4 +51,9 @@ class RideController extends Controller
         $ride->save();
         return redirect(route('ride.show',$ride));
     }
+    public function destroy(Ride $ride){
+        $ride->participants()->detach();
+        $ride->delete();
+        return redirect(route('events.my.index'));
+    }
 }

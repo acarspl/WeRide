@@ -1,12 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+    <form class="my-0 py-0" id="delete_form" action="@if($event->isRace) {{route('race.destroy', $event)}} @else {{route('ride.destroy', $event)}} @endif" method="POST">@method('DELETE') @csrf
+    </form>
     <div class="container col-12 col-md-9 col-lg-8 col-xl-6">
         <div class="card mt-2 mx-auto text-center">
             <div class="card-header bg-green mx-0  text-white font-weight-bold">
                 <img class="mb-2 mt-2" @if($event->isRace) src="{{asset('images/icons/map/race_flag.png')}}" alt="Race"  @else src="{{asset('images/logo/bike.png')}}" alt="Ride" @endif style="width: 20px" >
                 <span class="font-weight-bold mx-2 ">{{$event->name}}</span>
                 @if($event->user_id == Auth::id())
+                    <button class="btn btn-danger float-right mx-2" type="submit" form="delete_form">
+                        &#9747; Delete</button>
                     <a class="btn btn-primary float-right" type="button" href=" @if($event->isRace) {{route('race.edit', $event)}} @else {{route('ride.edit', $event)}} @endif ">
                         &#128295; Edit</a>
                     @endif
@@ -99,7 +103,7 @@
                             @if($event->route_link)
                                 <tr>
                                     <th>Route</th>
-                                    <td><a href="{{$event->route_link}}">{{$event->route_link}}</a> </td>
+                                    <td><a href="{{$event->route_link}}" target="_blank">{{$event->route_link}}</a> </td>
                                 </tr>
                                 @endif
                             @if(!$event->isRace)

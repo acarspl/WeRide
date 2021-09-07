@@ -6,6 +6,7 @@ use App\Models\Ride;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Log;
 
 class RidePolicy
 {
@@ -29,5 +30,8 @@ class RidePolicy
     }
     public function edit(User $user, Ride $ride){
         return $user->id === $ride->user_id;
+    }
+    public function destroy(User $user, Ride $ride){
+        return $user->id === (int)$ride->user_id;
     }
 }
