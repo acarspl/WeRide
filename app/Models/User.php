@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-use App\Traits\SportEventTrait;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use phpDocumentor\Reflection\Types\Boolean;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -75,10 +73,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function participatedRidesActive(){
         return $this->participatedRides()->where('start_time','>=',Carbon::now())->get();
     }
-    public function doesParticipate($event){
+    public function doesParticipate($event):bool{
         return $event->participants()->where('participant_id',$this->id)->count() === 1;
     }
-    public function joinRide(Ride $ride){
+    public function joinRide(Ride $ride):bool{
         if($ride->user_id != $this->id){
             $this->participatedRides()->save($ride);
             return true;
@@ -86,17 +84,17 @@ class User extends Authenticatable implements MustVerifyEmail
         return
             false;
     }
-    public function leaveRide(Ride $ride){
+    public function leaveRide(Ride $ride):bool{
         return $ride->participants()->where('participant_id',$this->id)->detach();
     }
-    public function joinRace(Race $race){
+    public function joinRace(Race $race):bool{
         if($race->user_id != $this->id){
             $this->participatedRaces()->save($race);
             return true;
         }
         return false;
     }
-    public function leaveRace(Race $race){
+    public function leaveRace(Race $race):bool{
         return $race->participants()->where('participant_id',$this->id)->detach();
     }
 }

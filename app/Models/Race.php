@@ -2,25 +2,20 @@
 
 namespace App\Models;
 
-use App\Interfaces\CountPeople;
-use App\Traits\SportEventTrait;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Race extends Model implements CountPeople
+class Race extends Event
 {
     use HasFactory;
-    use SportEventTrait;
 
     protected $guarded = ['id','user_id'];
     protected $casts = ['start_time' => 'datetime', 'end_time'=> 'datetime','signing_deadline'=>'datetime'];
 
     protected $appends = ['isRace'];
-    public function getIsRaceAttribute(){
+    public function getIsRaceAttribute():bool{
         return true;
     }
-    public function numberOfParticipants(){
+    public function numberOfParticipants():int{
         return $this->participants()->count() + 1;
     }
 }

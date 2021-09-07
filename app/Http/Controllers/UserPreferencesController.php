@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateUserPreferencesRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use const http\Client\Curl\AUTH_ANY;
 
 class UserPreferencesController extends Controller
 {
@@ -32,7 +31,7 @@ class UserPreferencesController extends Controller
         $preferences->save();
         return back();
     }
-    public function updateLocation(UpdateUserPreferencesRequest $request){
+    public function updateLocation(UpdateUserPreferencesRequest $request):bool{
         $preferences = Auth::user()->preferences;
         $preferences->location_lat = $request->validated()['start_location_lat'];
         $preferences->location_lng = $request->validated()['start_location_lng'];

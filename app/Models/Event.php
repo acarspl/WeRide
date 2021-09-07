@@ -1,39 +1,40 @@
 <?php
-namespace App\Traits;
-use App\Models\Race;
-use App\Models\TypeOfSport;
-use App\Models\User;
-use Carbon\Carbon;
 
-trait SportEventTrait{
+namespace App\Models;
+
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
+
+abstract class Event extends Model
+{
     public function user(){
         return $this->belongsTo(User::class,'user_id');
     }
     public function typeOfSport(){
         return $this->belongsTo(TypeOfSport::class,'sport_type_id');
     }
-    public function distanceInMiles(){
+    public function distanceInMiles():float{
         return round($this->distance / 1.609,2);
     }
-    public function elevationInFeet(){
+    public function elevationInFeet():float{
         return round($this->elevation * 3.281,2);
     }
-    public function minSpeedInMilesPerHour(){
+    public function minSpeedInMilesPerHour():float{
         return round($this->speed_min / 1.609,0);
     }
-    public function maxSpeedInMilesPerHour(){
+    public function maxSpeedInMilesPerHour():float{
         return round($this->speed_max / 1.609,0);
     }
-    public function startingPointMatchesFinish(){
+    public function startingPointMatchesFinish():bool{
         return $this->start_location_lat === $this->end_location_lat && $this->start_location_lng === $this->end_location_lng;
     }
     public function participants(){
         return $this->morphToMany(User::class,'participated','participants','participated_id','participant_id');
     }
-    public function doesUserParticipate(User $user){
+    public function doesUserParticipate(User $user):bool{
         return $this->participants()->where('participant_id',$user->id)->count() === 1;
     }
-    public static function getActiveWithinBounds($latSW, $lngSW, $latNE, $lngNE, User $user){
+    public static function getActiveWithinBounds(float $latSW,float $lngSW,float $latNE,float $lngNE, User $user){
         return parent::where([
             ['user_id','!=', $user->id],
             ['start_time','>=', Carbon::now()],
@@ -46,11 +47,11 @@ trait SportEventTrait{
     public static function indexActive(){
         return parent::where('start_time','>=', Carbon::now())->get();
     }
-    public function isRoundTrip(){
+    public function isRoundTrip():bool{
         return ($this->start_location_lat===$this->end_location_lat) && ($this->start_location_lng === $this->end_location_lng);
     }
     public function scopeStartTime($query, $operator, $dateTime){
-            return $query->where('start_time',$operator,$dateTime);
+        return $query->where('start_time',$operator,$dateTime);
     }
     public function scopeDistance($query, $operator, $distance){
         return $query->where('distance',$operator,$distance);
@@ -65,9 +66,10 @@ trait SportEventTrait{
         return $query->where('sport_type_id',$type);
     }
     public function scopeSpeedLessThan($query, $speed){
-            return $query->where('speed_min', '<=', $speed);
+        return $query->where('speed_min', '<=', $speed);
     }
     public function scopeSpeedMoreThan($query, $speed){
-            return $query->where('speed_max', '>=', $speed);
+        return $query->where('speed_max', '>=', $speed);
     }
+    public abstract function numberOfParticipants():int;
 }
