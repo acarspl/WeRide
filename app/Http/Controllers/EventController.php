@@ -27,26 +27,24 @@ class EventController extends Controller
     }
     public function indexWithinBounds(GetEventsWithinBoundsRequest $request){ // with filters
         $request = $request->process();
-        $races = collect();
-        $rides = collect();
+        $events = collect();
         if($request['is_race'] != 1) {
-            $races = Race::getActiveWithinBounds($request['latSW'], $request['lngSW'], $request['latNE'],
+            $events = $events->concat(Race::getActiveWithinBounds($request['latSW'], $request['lngSW'], $request['latNE'],
                 $request['lngNE'], Auth::user())->sportType($request['sport_type'])
                 ->startTime('>=', $request['start_time_from'])->startTime('<=', $request['start_time_to'])
                 ->distance('>=', $request['distance_from'])->distance('<=', $request['distance_to'])
                 ->elevation('>=', $request['elevation_from'])->elevation('<=', $request['elevation_to'])
-                ->take(200)->get();
+                ->take(200)->get());
         }
         if($request['is_race'] != 2) {
-            $rides = Ride::getActiveWithinBounds($request['latSW'], $request['lngSW'], $request['latNE'],
+            $events = $events->concat(Ride::getActiveWithinBounds($request['latSW'], $request['lngSW'], $request['latNE'],
                 $request['lngNE'], Auth::user())->sportType($request['sport_type'])
                 ->startTime('>=', $request['start_time_from'])->startTime('<=', $request['start_time_to'])
                 ->distance('>=', $request['distance_from'])->distance('<=', $request['distance_to'])
                 ->elevation('>=', $request['elevation_from'])->elevation('<=', $request['elevation_to'])
                 ->speedLessThan($request['speed_to'])->speedMoreThan($request['speed_from'])
-                ->take(200)->get();
+                ->take(200)->get());
         }
-        $events = $races->concat($rides);
         foreach ($events as $event){
             $event->number_of_participants = $event->numberOfParticipants();
         }
