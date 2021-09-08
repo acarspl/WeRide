@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RaceRequest;
 use App\Models\Race;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class RaceController extends Controller
 {

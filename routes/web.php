@@ -17,12 +17,9 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'welcome']);
 
 Auth::routes(['verify' => true]);
 
-Route::get('/race',[\App\Http\Controllers\RaceController::class, 'index'])->name('race.index');
-Route::get('/race/{race}',[\App\Http\Controllers\RaceController::class,'show'])->name('race.show');
-Route::get('/events/bounds',[\App\Http\Controllers\EventController::class,'indexWithinBounds'])->name('events.in.bounds');
 Route::middleware(['auth','verified'])->group(function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/race/create',[\App\Http\Controllers\RaceController::class, 'create'])->name('race.create');
+    Route::get('/race/create',[\App\Http\Controllers\RaceController::class,'create'])->name('race.create');
     Route::get('/race/{race}/edit',[\App\Http\Controllers\RaceController::class,'edit'])->name('race.edit')->middleware('can:edit,race');
     Route::patch('/race/{race}',[\App\Http\Controllers\RaceController::class,'update'])->name('race.update')->middleware('can:edit,race');
     Route::post('/race',[\App\Http\Controllers\RaceController::class, 'store'])->name('race.store');
@@ -43,5 +40,7 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::get('/user/preferences',[\App\Http\Controllers\UserPreferencesController::class,'show'])->name('user.preferences.show');
     Route::patch('/user/preferences',[\App\Http\Controllers\UserPreferencesController::class, 'update'])->name('user.preferences.update');
     Route::patch('/user/preferences/location',[\App\Http\Controllers\UserPreferencesController::class, 'updateLocation'])->name('user.preferences.update.location');
-
 });
+Route::get('/race',[\App\Http\Controllers\RaceController::class, 'index'])->name('race.index');
+Route::get('/race/{race}',[\App\Http\Controllers\RaceController::class,'show'])->name('race.show');
+Route::get('/events/bounds',[\App\Http\Controllers\EventController::class,'indexWithinBounds'])->name('events.in.bounds');

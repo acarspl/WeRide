@@ -18,6 +18,10 @@ class CreateRaceTest extends TestCase
         $this->seed();
 
     }
+    public function test_verified_user_can_see_create_form(){
+       $user =  User::factory()->create();
+        $this->actingAs($user)->get(route('race.create'))->assertStatus(200);
+    }
     public function test_verified_user_can_create_race(){
         User::factory()->create();
         $user = Auth::loginUsingId(1);
