@@ -14,13 +14,16 @@
                 <h4 class="text-center text-white mt-2 mx-3">@isset($event) Edit @else Create a new @endisset @if($isRace) race @else ride @endif</h4>
             </div>
             <div class="card-body">
-                <form id="create_ride_form" action="@if($isRace)@isset($event){{route('race.update',$event)}}@else{{route('race.store')}}@endisset @else @isset($event){{route('ride.update',$event)}}@else{{route('ride.store')}}@endisset @endif" method="POST">
+                <form id="event_form" action="@if($isRace)@isset($event){{route('race.update',$event)}}@else{{route('race.store')}}@endisset @else @isset($event){{route('ride.update',$event)}}@else{{route('ride.store')}}@endisset @endif" method="POST">
                     @csrf
                     @isset($event)
                         @method('PATCH')
                         @else
                     @method('post')
                     @endisset
+                    <div class="alert alert-danger text-center d-none" id="select_sport_alert" role="alert">
+                        Select Sport
+                    </div>
                     {{--SPORT SELECTOR--}}
                     <div>
                         <input type="hidden" name="sport_type_id" id="sport_type_id" value=0>
@@ -51,12 +54,12 @@
                         <hr>
                         {{--END OF SPORT SELECTOR--}}
                         <div class="form-group text-center mx-auto">
-                            <label for="name" class="formLabelBigger">Event Name</label>
+                            <label for="name" class="formLabelBigger input-required">Event Name</label>
                             <textarea maxlength="200" minlength="4" class="form-control text-center" id="name" name="name" rows="1" required
                             >@isset($event){{$event->name}}@endisset</textarea>
                         </div>
                         <div class="form-group text-center mt-3">
-                            <label for="start_time" class="formLabelBigger">Start Time</label>
+                            <label for="start_time" class="formLabelBigger input-required">Start Time</label>
                             <input type="datetime-local" class="form-control text-center col-10 col-sm-6 mx-auto" id="start_time" name="start_time"
                                    @isset($event)
                                    value="{{substr(\Carbon\Carbon::parse($event->start_time)->toDateTimeLocalString(),0,16)}}"
@@ -68,7 +71,7 @@
                                    max="{{substr(\Carbon\Carbon::now()->addYear()->toDateTimeLocalString(),0,16)}}" required>
                         </div>
                         <div class="form-group text-center">
-                            <label class="formLabelBigger" >Start Location</label>
+                            <label class="formLabelBigger input-required" >Start Location</label>
                             <div id="start_location_map" style="height: 400px"></div>
                             <input type="hidden" value="null" id="start_location_lat" name="start_location_lat">
                             <input type="hidden" value="null" id="start_location_lng" name="start_location_lng">
@@ -108,7 +111,7 @@
                             @isset($event) value="{{$event->route_link}}" @endisset>
                         </div>
                         <div class="form-group text-center">
-                            <label for="distance" class="formLabelBigger">Distance</label>
+                            <label for="distance" class="formLabelBigger input-required">Distance</label>
                             <div class="row mx-auto col-7 col-md-5">
                                 <input type="number" min="1" max="2000" step="0.1" class="pl-5 form-control col-8 col-md-9 col-xl-10 text-center "
                                        @isset($event) value="{{$event->distance}}" @endisset id="distance" required>
@@ -141,7 +144,7 @@
                         @if(!$isRace)
                         <div class="row">
                             <div class="form-group col-6 text-center">
-                                <label for="speed_min" class="formLabelBigger">Minimum Average Speed</label>
+                                <label for="speed_min" class="formLabelBigger input-required">Minimum Average Speed</label>
                                 <div class="row mx-auto">
                                     <input type="number" min="4" max="55" step="0.1" @isset($event) value="{{$event->speed_min}}" @endisset class=" pl-5 form-control col-7 col-lg-10 text-center" id="speed_min" required>
                                     <input type="hidden" min="4"  @isset($event) value="{{$event->speed_min}}" @endisset id="speed_min_final" name="speed_min">
@@ -149,7 +152,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-6 text-center">
-                                <label for="speed_max" class="formLabelBigger">Maximum Average Speed</label>
+                                <label for="speed_max" class="formLabelBigger input-required">Maximum Average Speed</label>
                                 <div class="row  mx-auto">
                                     <input type="number" min="4" max="55" step="0.1" @isset($event) value="{{$event->speed_max}}" @endisset class="pl-5 form-control col-7 col-lg-10 text-center" id="speed_max" required>
                                     <input type="hidden" min="4"  id="speed_max_final" @isset($event) value="{{$event->speed_max}}" @endisset name="speed_max">
@@ -159,7 +162,7 @@
                         </div>
                         @endif
                         <div class="form-group text-center">
-                            <label for="signing_deadline" class="formLabelBigger ">Signing Deadline</label>
+                            <label for="signing_deadline" class="formLabelBigger input-required">Signing Deadline</label>
                             <input type="datetime-local" class="form-control text-center col-10 col-sm-6 mx-auto" id="signing_deadline" name="signing_deadline" required
                                    @isset($event)
                                        value="{{substr(\Carbon\Carbon::parse($event->signing_deadline)->toDateTimeLocalString(),0,16)}}"
@@ -170,7 +173,7 @@
                                    min="{{substr(\Carbon\Carbon::now()->toDateTimeLocalString(),0,16)}}"
                             @endisset>
                         </div>
-                        <div class="form-group text-left">
+                        <div class="form-group text-center">
                             <label for="description" class="formLabelBigger">Description</label>
                             <textarea maxlength="920" class="form-control" id="description" name="description"
                                       rows="3">@isset($event){{$event->description}}@endisset</textarea>
@@ -213,18 +216,19 @@
                             </div>
                         </div>
                         @endif
-                        <button class="btn btn-success btn-block mt-3" id="create_ride_button" type="submit">@isset($event)Edit @else Submit @endisset</button>
+                        <button class="btn btn-success btn-block mt-3" id="create_ride_button" onclick="verifyAndSubmit()"  type="button">@isset($event)Edit @else Submit @endisset</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    {{--ADD MAPBOX TOKEN FORM ENV FILE--}}
     <script type="text/javascript">
+            {{--ADD MAPBOX TOKEN FORM ENV FILE--}}
         let mapBoxToken = "{{config('services.mapbox.token')}}";
+                {{--SET JS VARIABLES--}}
         let metricUnits = true;
-        let end_location_lat = null;
-        let end_location_lng = null;
+        let endLocationLat = null;
+        let endLocationLng = null;
         @isset($event)
         let defaultLocationLat = "{{$event->start_location_lat}}";
         let defaultLocationLng = "{{$event->start_location_lng}}";

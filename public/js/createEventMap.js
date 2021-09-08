@@ -56,7 +56,7 @@ function updateField(field, coordinates){
 
 // END MAP
 if(document.getElementById('end_location_map')!== null){
-    if(endLocationLat != null && endLocationLng !=null){
+    if(endLocationLat !== null && endLocationLng !==null){
         var endMap = L.map('end_location_map').setView([endLocationLat, endLocationLng], 13);
     }
     else{
@@ -86,7 +86,7 @@ if(document.getElementById('end_location_map')!== null){
             updateField("end",e.latlng);
         }
     });
-    if(defaultLocationLat !== '' && defaultLocationLng !==''){
+    if(defaultLocationLat !== '' && defaultLocationLng !=='' && endLocationLat  !== null && endLocationLng!== null){
         if(defaultLocationLat != endLocationLat && defaultLocationLng != endLocationLng){
             $("#round_trip_button").removeClass('btn-success').addClass('btn-outline-success').text("One Way Trip");
             $("#end_location").removeClass('d-none');

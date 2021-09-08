@@ -1,5 +1,6 @@
 // SPORT SELECTOR
 $(".sport_type_box").on('click',function (e) {
+    $('#select_sport_alert').addClass('d-none');
     $('.sport_type_box').find('img').addClass('fadedImage');
     $('.sport_type_box').find('h4').addClass('fadedText').removeClass('bg-green');
     $('#'+this.children[0].id).removeClass('fadedImage');
@@ -204,4 +205,15 @@ if(sportSelector){
         default:
             console.log("Error, no type selected!");
     }
+}
+
+// submit
+function verifyAndSubmit(){
+    // validate if type of sport is selceted
+    if($("#sport_type_id").val()==0){
+        $('#select_sport_alert').removeClass('d-none');
+        document.getElementById("select_sport_alert").scrollIntoView();
+        return false;
+    }
+    $('#event_form').submit();
 }

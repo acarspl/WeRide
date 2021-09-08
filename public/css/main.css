@@ -95,4 +95,8 @@ body{
 .fadedText{
     opacity: 0.6;
 }
+.input-required:after{
+    content: " *";
+    color: red;
+}
 
