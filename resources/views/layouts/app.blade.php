@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html style="height: 100%" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,7 +34,7 @@
             crossorigin=""></script>
 
 </head>
-<body>
+<body style="height: 100%;">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-green  shadow-sm  ">
             <div class="container">
@@ -60,7 +60,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                            <li class="nav-item  mt-3 mx-1 mt-md-0 py-0 py-md-3 py-lg-0 @guest() mx-3 @endguest">
+                            <li class="nav-item   @auth mt-3 mx-1 mt-md-0 py-0 py-md-3 py-lg-0 @else mx-3 @endauth">
                                 <a class="px-3 btn btn-green-light nav-link text-white rhombus-right"  href="{{route('race.index')}}">Races</a>
                             </li>
                         @auth

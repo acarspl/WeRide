@@ -1,11 +1,18 @@
 @extends('layouts.app')
-
 @section('content')
-<div class="container">
+    <style>
+        body {
+            background-image: url("{{asset('images/background/riding_towards_sunset.jpg')}}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50% 80%;
+        }
+    </style>
+<div class="container mt-3">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Confirm Password') }}</div>
+            <div class="card border-0">
+                <div class="card-header text-center text-white bg-green">{{ __('Confirm Password') }}</div>
 
                 <div class="card-body">
                     {{ __('Please confirm your password before continuing.') }}

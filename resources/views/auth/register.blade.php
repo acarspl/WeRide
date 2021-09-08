@@ -1,12 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+    {{--BACKGROUND--}}
+    <style>
+        body {
+            background-image: url("{{asset('images/background/black_white_cobble.jpg')}}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 20% 50%;
+        }
+    </style>
+    {{--CONTENT--}}
+<div class="container mt-3">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
+        <div class="col-lg-8">
+            <div class="card border-0">
+                <div class="card-header bg-green text-white text-center">{{ __('Register') }}</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
@@ -63,7 +72,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-block btn-lg btn-green">
                                     {{ __('Register') }}
                                 </button>
                             </div>

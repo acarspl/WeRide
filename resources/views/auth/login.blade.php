@@ -1,11 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+    {{--BACKGROUND--}}
+    <style>
+        body {
+            background-image: url("{{asset('images/background/cycling_through_mountains.jpg')}}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 70% 50%;
+        }
+    </style>
+    {{--CONTENT--}}
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+        <div class="col-lg-8">
+            <div class="card border-0 mt-3">
+                <div class="card-header bg-green text-center text-white">{{ __('Login') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -53,7 +63,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-green">
                                     {{ __('Login') }}
                                 </button>
 

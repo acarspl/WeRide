@@ -1,13 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+    {{--BACKGROUND--}}
+    <style>
+        body {
+            background-image: url("{{asset('images/background/black_white_panning.jpg')}}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50% 80%;
+        }
+    </style>
+    {{--CONTENT--}}
+<div class="container mt-3">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+        <div class="col-lg-8">
+            <div class="card border-0">
+                <div class="card-header bg-green text-white text-center">{{ __('Verify Your Email Address') }}</div>
 
-                <div class="card-body">
+                <div class="card-body" style="font-size: 105%">
                     @if (session('resent'))
                         <div class="alert alert-success" role="alert">
                             {{ __('A fresh verification link has been sent to your email address.') }}
