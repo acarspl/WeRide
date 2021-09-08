@@ -65,10 +65,12 @@
                         <table class="table table-sm ">
                             <tbody>
                             @if($event->user->id != \Illuminate\Support\Facades\Auth::id())
+                                @auth
                             <tr>
                                 <th>Organizer</th>
                                 <td>{{$event->user->name}}</td>
                             </tr>
+                                    @endauth
                             @endif
                             <tr>
                                 <th>Start</th>
@@ -81,10 +83,11 @@
                             <tr>
                                 <th>Distance</th>
                                 <td>
-                                @if(Auth::user()->preferences->metric)
-                                    {{$event->distance}} km
+                                @if(Auth::check() && !Auth::user()->preferences->metric)
+                                        {{$event->distanceInMiles()}} mi
                                 @else
-                                    {{$event->distanceInMiles()}} mi
+                                        {{$event->distance}} km
+
                                 @endif
                                 </td>
                             </tr>
@@ -92,10 +95,10 @@
                                 <tr>
                                     <th>Elevation</th>
                                     <td>
-                                        @if(Auth::user()->preferences->metric)
-                                            {{$event->elevation}} m
-                                        @else
+                                        @if(Auth::check() && !Auth::user()->preferences->metric)
                                             {{$event->elevationInFeet()}} ft
+                                        @else
+                                            {{$event->elevation}} m
                                         @endif
                                     </td>
                                 </tr>
@@ -178,6 +181,7 @@
                                 @endif
                             </tbody>
                         </table>
+                        @auth
                         @include('events.components.join_event_button',['event'=>$event])
                         <h4 class="mt-3">Going</h4>
                         <table class="table mt-1">
@@ -207,7 +211,7 @@
                                 </tr>
                                 @endforeach
                         </table>
-
+                        @endauth
                     </div>
                 </div>
             </div>

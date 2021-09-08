@@ -60,10 +60,10 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        @auth
-                            <li class="nav-item  mt-3 mx-1 mt-md-0 py-0 py-md-3 py-lg-0">
+                            <li class="nav-item  mt-3 mx-1 mt-md-0 py-0 py-md-3 py-lg-0 @guest() mx-3 @endguest">
                                 <a class="px-3 btn btn-green-light nav-link text-white rhombus-right"  href="{{route('race.index')}}">Races</a>
                             </li>
+                        @auth
                             <li class="nav-item  mt-3 mx-1 mt-md-0  py-0 py-md-3 py-lg-0">
                                 <a class="px-3 btn btn-green-light nav-link text-white rhombus-right"  href="{{route('events.index')}}">Explore</a>
                             </li>

@@ -41,6 +41,10 @@ function loadEventsInScope(){
 }
 function loadEvents(latSW, lngSW, latNE, lngNE){
     let url ="/events/bounds";
+    let isRace = 2;
+    if(onlyRaces != 1){
+        isRace = $('#is_race').val();
+    }
     $.ajax({
         type: "GET",
         headers: {
@@ -52,7 +56,7 @@ function loadEvents(latSW, lngSW, latNE, lngNE){
             "lngSW": lngSW,
             "latNE": latNE,
             "lngNE": lngNE,
-            "is_race": $('#is_race').val(),
+            "is_race": isRace,
             'sport_type': $('#sport_type').val(),
             "start_time_from": $('#start_time_from').val(),
             'start_time_to': $('#start_time_to').val(),
@@ -135,7 +139,7 @@ function getPopupContent(event){
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <a type="button" target="_blank" class="btn btn-success btn-block link-as-text" ${event.isRace? "href='/race/"+event.id+"'" : "href='/ride/"+event.id+"'"}>Details</a>
+                            <a type="button" target="_blank" style="color:white !important;" class="btn btn-success btn-block link-as-text" ${event.isRace? "href='/race/"+event.id+"'" : "href='/ride/"+event.id+"'"}>Details</a>
                         </td>
                     </tr>
 

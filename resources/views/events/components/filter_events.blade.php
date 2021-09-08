@@ -9,9 +9,14 @@
                 <div class="col-4 col-lg-2 text-center font-weight-bold pt-1">Event Type</div>
                 <div class="col-8 col-lg-4">
                     <select class="filterInput custom-select" id="is_race">
-                        <option value="0" selected>Rides & Races</option>
-                        <option value="1">Rides Only</option>
-                        <option value="2">Races Only</option>
+                    @if(\Illuminate\Support\Facades\Route::current()->getName()=='race.index')
+                            <option value="2"  selected >Races Only</option>
+                        @else
+                            <option value="0" selected>Rides & Races</option>
+                            <option value="1">Rides Only</option>
+                            <option value="2" >Races Only</option>
+                        @endif
+
                     </select>
                 </div>
                 <div  class="col-4 col-lg-2 mt-1 mt-lg-0 text-center font-weight-bold pt-1">Sport</div>
@@ -32,15 +37,15 @@
                            min="{{substr(\Carbon\Carbon::now()->toDateTimeLocalString(),0,16)}}" max="{{substr(\Carbon\Carbon::now()->addYear()->toDateTimeLocalString(),0,16)}}" ></div>
                 <div class="col-4 col-lg-2 mt-1 mt-lg-0"><input type="datetime-local" class="filterInput form-control   text-center" id="start_time_to" name="start_time_to"
                            min="{{substr(\Carbon\Carbon::now()->toDateTimeLocalString(),0,16)}}" max="{{substr(\Carbon\Carbon::now()->addYear()->toDateTimeLocalString(),0,16)}}" ></div>
-                <div  class="col-4 col-lg-2 mt-1 mt-lg-0 text-center font-weight-bold pt-1">Speed @if(\Illuminate\Support\Facades\Auth::user()->preferences->metric)(kph) @else (mph) @endif</div>
+                <div  class="col-4 col-lg-2 mt-1 mt-lg-0 text-center font-weight-bold pt-1">Speed  @if(\Illuminate\Support\Facades\Auth::check() && !\Illuminate\Support\Facades\Auth::user()->preferences->metric)(mph) @else (kph) @endif</div>
                 <div class="col-4 col-lg-2 mt-1 mt-lg-0"><input type="number" min="0" max="55" step="0.1" class="filterInput form-control  text-center" id="speed_from"></div>
                 <div class="col-4 col-lg-2 mt-1 mt-lg-0"><input type="number" min="0" max="55" step="0.1" class="filterInput  form-control text-center" id="speed_to"></div>
             </div>
             <div class="row">
-                <div  class="col-4 col-lg-2 mt-1 mt-lg-0 text-center font-weight-bold pt-1">Distance @if(\Illuminate\Support\Facades\Auth::user()->preferences->metric)(km) @else (mi) @endif</div>
+                <div  class="col-4 col-lg-2 mt-1 mt-lg-0 text-center font-weight-bold pt-1">Distance @if(\Illuminate\Support\Facades\Auth::check() && !\Illuminate\Support\Facades\Auth::user()->preferences->metric)(ft) @else (km) @endif</div>
                 <div class="col-4 col-lg-2 mt-1 mt-lg-0"><input type="number" min="0" max="2000" step="0.1" class="filterInput  form-control text-center " id="distance_from"></div>
                 <div class="col-4 col-lg-2 mt-1 mt-lg-0"> <input type="number" min="0" max="2000" step="0.1" class="filterInput  form-control text-center " id="distance_to"></div>
-                <div class="col-4 col-lg-2 mt-1 mt-lg-0 text-center font-weight-bold pt-1">Elevation @if(\Illuminate\Support\Facades\Auth::user()->preferences->metric)(m) @else (ft) @endif </div>
+                <div class="col-4 col-lg-2 mt-1 mt-lg-0 text-center font-weight-bold pt-1">Elevation @if(\Illuminate\Support\Facades\Auth::check() && !\Illuminate\Support\Facades\Auth::user()->preferences->metric)(ft) @else (m) @endif </div>
                 <div class="col-4 col-lg-2 mt-1 mt-lg-0"><input type="number" min="0" max="90000" step="1"  class="filterInput  form-control  text-center" id="elevation_from"></div>
                 <div class="col-4 col-lg-2 mt-1 mt-lg-0"><input type="number" min="0" max="90000" step="1"  class="filterInput  form-control  text-center" id="elevation_to"></div>
             </div>

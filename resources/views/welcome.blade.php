@@ -51,7 +51,7 @@
     <div class="row justify-content-center mx-0">
         <div class="col-6 col-lg-5 col-xl-4 p-0 imageMoreInfoOnHover round-bottom-left" style="position:relative;">
             <img src="{{asset('images/bikers/road_race.jpg')}}" class="round-bottom-left"  style="width: 100%;" alt="Road race">
-            <a class="btn btn-outline-light btn-lg overlayTextCenterFaded" href="#" >Find out more</a>
+            <a class="btn btn-outline-light btn-lg overlayTextCenterFaded" href="{{route('race.index')}}" >Find out more</a>
         </div>
         <div class="col-6 col-lg-5 col-xl-4 p-0 imageMoreInfoOnHover round-bottom-right" style="position:relative;">
             <img src="{{asset('images/bikers/city_bikers.jpg')}}" class="round-bottom-right" style=" width: 100%;" alt="Group Ride">

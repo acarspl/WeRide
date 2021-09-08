@@ -7,6 +7,7 @@ use App\Models\Race;
 use App\Models\Ride;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class EventController extends Controller
 {
@@ -30,7 +31,7 @@ class EventController extends Controller
         $events = collect();
         if($request['is_race'] != 1) {
             $events = $events->concat(Race::getActiveWithinBounds($request['latSW'], $request['lngSW'], $request['latNE'],
-                $request['lngNE'], Auth::user())->sportType($request['sport_type'])
+                $request['lngNE'])->sportType($request['sport_type'])
                 ->startTime('>=', $request['start_time_from'])->startTime('<=', $request['start_time_to'])
                 ->distance('>=', $request['distance_from'])->distance('<=', $request['distance_to'])
                 ->elevation('>=', $request['elevation_from'])->elevation('<=', $request['elevation_to'])
@@ -38,7 +39,7 @@ class EventController extends Controller
         }
         if($request['is_race'] != 2) {
             $events = $events->concat(Ride::getActiveWithinBounds($request['latSW'], $request['lngSW'], $request['latNE'],
-                $request['lngNE'], Auth::user())->sportType($request['sport_type'])
+                $request['lngNE'])->sportType($request['sport_type'])
                 ->startTime('>=', $request['start_time_from'])->startTime('<=', $request['start_time_to'])
                 ->distance('>=', $request['distance_from'])->distance('<=', $request['distance_to'])
                 ->elevation('>=', $request['elevation_from'])->elevation('<=', $request['elevation_to'])
@@ -48,6 +49,6 @@ class EventController extends Controller
         foreach ($events as $event){
             $event->number_of_participants = $event->numberOfParticipants();
         }
-        return $events;
+        return $events->where('user_id','!=',Auth::id());
     }
 }

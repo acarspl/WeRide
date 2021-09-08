@@ -34,9 +34,8 @@ abstract class Event extends Model
     public function doesUserParticipate(User $user):bool{
         return $this->participants()->where('participant_id',$user->id)->count() === 1;
     }
-    public static function getActiveWithinBounds(float $latSW,float $lngSW,float $latNE,float $lngNE, User $user){
+    public static function getActiveWithinBounds(float $latSW,float $lngSW,float $latNE,float $lngNE){
         return parent::where([
-            ['user_id','!=', $user->id],
             ['start_time','>=', Carbon::now()],
             ['start_location_lat','>=',$latSW],
             ['start_location_lng','>=',$lngSW],

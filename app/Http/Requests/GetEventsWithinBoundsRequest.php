@@ -46,7 +46,10 @@ class GetEventsWithinBoundsRequest extends FormRequest
     }
     public function process(){
         $request = $this->validated();
-        if(!Auth::user()->preferences->metric){
+        if(!Auth::check()){
+            $request['is_race'] = 2;
+        }
+        if(Auth::check() && !Auth::user()->preferences->metric){
             $request['speed_from'] = Units::convertMilesToKilometers($request['speed_from']);
             $request['speed_to'] = Units::convertMilesToKilometers($request['speed_to']);
             $request['distance_from'] = Units::convertMilesToKilometers($request['distance_from']);

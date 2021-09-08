@@ -3,8 +3,9 @@
 @include('events.components.filter_events')
 <script type="text/javascript">
     mapBoxToken = '{{config('services.mapbox.token')}}';
-    metricUnits = '{{Auth::user()->preferences->metric}}';
-    defaultLocationLat = '{{\Illuminate\Support\Facades\Auth::user()->preferences->location_lat}}';
-    defaultLocationLng = '{{\Illuminate\Support\Facades\Auth::user()->preferences->location_lng}}';
+    metricUnits = @auth'{{Auth::user()->preferences->metric}}' @else '1' @endauth;
+    defaultLocationLat = @auth'{{\Illuminate\Support\Facades\Auth::user()->preferences->location_lat}}'@else '51.505' @endauth ;
+    defaultLocationLng = @auth'{{\Illuminate\Support\Facades\Auth::user()->preferences->location_lng}}'@else '-0.09' @endauth;
+    let onlyRaces = '{{$onlyRaces}}';
     </script>
 <script type="text/javascript" src="{{asset('js/showEventsOnMap.js')}}"></script>
