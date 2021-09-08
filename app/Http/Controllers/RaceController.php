@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreRaceRequest;
+use App\Http\Requests\RaceRequest;
 use App\Models\Race;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +15,7 @@ class RaceController extends Controller
     public function index(){
         return view('event_management.race.index');
     }
-    public function store(StoreRaceRequest $request){
+    public function store(RaceRequest $request){
         $race = new Race();
         $race->fill($request->validated());
         $race->user_id = Auth::id();
@@ -42,7 +42,7 @@ class RaceController extends Controller
         $event = $race;
         return view('event_management.manage_event',compact('isRace','event'));
     }
-    public function update(StoreRaceRequest $request, Race $race){
+    public function update(RaceRequest $request, Race $race){
         $race->fill($request->validated());
         if((is_null($request->get('end_location_lat')) && is_null($request->get('end_location_lng')))){
             $race->end_location_lat = $request->get('start_location_lat');

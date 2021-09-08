@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreRideRequest;
+use App\Http\Requests\RideRequest;
 use App\Models\Ride;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +13,7 @@ class RideController extends Controller
         $isRace = false;
         return view('event_management.manage_event', compact('isRace'));
     }
-    public function store(StoreRideRequest $request){
+    public function store(RideRequest $request){
         $ride = new Ride();
         $ride->fill($request->validated());
         $ride->user_id = Auth::id();
@@ -41,7 +41,7 @@ class RideController extends Controller
         $event = $ride;
         return view('event_management.manage_event', compact('isRace', 'event'));
     }
-    public function update(StoreRideRequest $request, Ride $ride){
+    public function update(RideRequest $request, Ride $ride){
         $ride->fill($request->validated());
         $ride->end_time = $ride->calculateEndTime();
         if((is_null($request->get('end_location_lat')) && is_null($request->get('end_location_lng')))){
