@@ -226,7 +226,7 @@
             {{--ADD MAPBOX TOKEN FORM ENV FILE--}}
         let mapBoxToken = "{{config('services.mapbox.token')}}";
                 {{--SET JS VARIABLES--}}
-        let metricUnits = true;
+        let metricUnits = 'true'==="{{\Illuminate\Support\Facades\Auth::user()->preferences->metric}}";
         let endLocationLat = null;
         let endLocationLng = null;
         @isset($event)
@@ -240,7 +240,6 @@
         let defaultLocationLng = "{{\Illuminate\Support\Facades\Auth::user()->preferences->location_lng}}";
         let sportSelector = false;
             @endisset
-        {{-- @TODO METRIC UNITS IMPLEMENTATION --}}
     </script>
     <script src="{{ asset('js/createEventMap.js') }}" ></script>
     <script src="{{ asset('js/createEventForm.js') }}" ></script>

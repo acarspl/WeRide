@@ -29,18 +29,28 @@ $(".sport_type_box").on('click',function (e) {
 
 // DISTANCE METRIC/IMPERIAL
 let distanceMetric = metricUnits;
+if(!distanceMetric){
+    changeDistanceToImperial();
+}
 $('#distance_button').on('click',function(){
     if(distanceMetric){
-        $('#distance_button').addClass('btn-outline-primary').removeClass('btn-primary').text('mi');
-        distanceMetric = false;
-        $('#distance').val(kilometersToMiles($('#distance').val()));
+        changeDistanceToImperial();
     }
     else{
-        $('#distance_button').addClass('btn-primary').removeClass('btn-outline-primary').text('Km');
-        distanceMetric = true;
-        $('#distance').val(milesToKilometers($('#distance').val()));
+        changeDistanceToMetric();
     }
 });
+function changeDistanceToMetric(){
+    $('#distance_button').addClass('btn-primary').removeClass('btn-outline-primary').text('Km');
+    distanceMetric = true;
+    $('#distance').val(milesToKilometers($('#distance').val()));
+}
+function changeDistanceToImperial(){
+    $('#distance_button').addClass('btn-outline-primary').removeClass('btn-primary').text('mi');
+    distanceMetric = false;
+    $('#distance').val(kilometersToMiles($('#distance').val()));
+}
+
 $('#distance').change(function () {
     setDistanceFinal();
 });
@@ -64,18 +74,27 @@ function convertDistanceToMetrics(distance){
 
 // ELEVATION METRIC/IMPERIAL
 let elevationMetric = metricUnits;
+if(!elevationMetric){
+    changeElevationToImperial();
+}
 $('#elevation_button').on('click',function(){
     if(elevationMetric){
-        $('#elevation_button').addClass('btn-outline-primary').removeClass('btn-primary').text('ft');
-        elevationMetric = false;
-        $('#elevation').val(metersToFeet($('#elevation').val()));
+        changeElevationToImperial();
     }
     else{
-        $('#elevation_button').addClass('btn-primary').removeClass('btn-outline-primary').text('M');
-        elevationMetric = true;
-        $('#elevation').val(feetToMeters($('#elevation').val()));
+        changeElevationToMetric();
     }
 });
+function changeElevationToMetric(){
+    $('#elevation_button').addClass('btn-primary').removeClass('btn-outline-primary').text('M');
+    elevationMetric = true;
+    $('#elevation').val(feetToMeters($('#elevation').val()));
+}
+function changeElevationToImperial(){
+    $('#elevation_button').addClass('btn-outline-primary').removeClass('btn-primary').text('ft');
+    elevationMetric = false;
+    $('#elevation').val(metersToFeet($('#elevation').val()));
+}
 $('#elevation').change(function () {
     setElevationFinal();
 });
@@ -99,24 +118,33 @@ function convertElevationToMetrics(elevation){
 
 // Min Average Speed
 let metricAverageSpeed = metricUnits;
+if(!metricAverageSpeed){
+    changeSpeedToImperial();
+}
 $('.speed_button').on('click',function(){
     if(metricAverageSpeed){
-        $('.speed_button').addClass('btn-outline-primary').removeClass('btn-primary').text('mph');
-        metricAverageSpeed = false;
-        $('#speed_min').val(kilometersToMiles($('#speed_min').val()));
-        $('#speed_max').val(kilometersToMiles($('#speed_max').val()));
-        $('#speed_max').attr('min',$('#speed_min').val());
-        $('#speed_min').attr('max',$('#speed_max').val());
+      changeSpeedToImperial();
     }
     else{
-        $('.speed_button').addClass('btn-primary').removeClass('btn-outline-primary').text('Kph');
-        metricAverageSpeed = true;
-        $('#speed_min').val(milesToKilometers($('#speed_min').val()));
-        $('#speed_max').val(milesToKilometers($('#speed_max').val()));
-        $('#speed_max').attr('min',$('#speed_min').val());
-        $('#speed_min').attr('max',$('#speed_max').val());
+        changeSpeedToMetric();
     }
 });
+function changeSpeedToImperial(){
+    $('.speed_button').addClass('btn-outline-primary').removeClass('btn-primary').text('mph');
+    metricAverageSpeed = false;
+    $('#speed_min').val(kilometersToMiles($('#speed_min').val()));
+    $('#speed_max').val(kilometersToMiles($('#speed_max').val()));
+    $('#speed_max').attr('min',$('#speed_min').val());
+    $('#speed_min').attr('max',$('#speed_max').val());
+}
+function changeSpeedToMetric(){
+    $('.speed_button').addClass('btn-primary').removeClass('btn-outline-primary').text('Kph');
+    metricAverageSpeed = true;
+    $('#speed_min').val(milesToKilometers($('#speed_min').val()));
+    $('#speed_max').val(milesToKilometers($('#speed_max').val()));
+    $('#speed_max').attr('min',$('#speed_min').val());
+    $('#speed_min').attr('max',$('#speed_max').val());
+}
 $('#speed_min').change(function () {
     setMinSpeedFinal();
 });
