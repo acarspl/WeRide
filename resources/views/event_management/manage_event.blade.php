@@ -179,12 +179,21 @@
                                       rows="3">@isset($event){{$event->description}}@endisset</textarea>
                         </div>
                         @if($isRace)
-                            <div class="form-group text-center">
-                                <label for="price" class="formLabelBigger">Price</label>
-                                <input type="number" min="0" step="0.01" class="form-control text-center col-10 col-sm-6 mx-auto" id="price" name="price"
-                                       value="@isset($event){{$event->price}}@else{{0}}@endisset" required>
+                            <div class="row text-center justify-content-center">
+                                <div class="col-6">
+                                    <label for="price" class="formLabelBigger">Signing Fee</label>
+                                    <input type="number" min="0" step="0.01" class="form-control text-center col-12 mx-auto" id="price" name="price"
+                                           value="@isset($event){{$event->price}}@else{{0}}@endisset" required>
+                                </div>
+                                <div class="col-6">
+                                    <label for="currency" class="formLabelBigger">Currency</label>
+                                    <input type="text" min="0" maxlength="3" class="form-control text-center col-12 mx-auto" id="currency" name="currency"
+                                           value="@isset($event){{$event->currency}}@else{{''}}@endisset">
+                                </div>
+
+
                             </div>
-                            <div class="form-group text-center">
+                            <div class="form-group text-center mt-4">
                                 <label for="requirements" class="formLabelBigger">Requirements</label>
                                 <textarea maxlength="276" class="form-control" id="requirements" name="requirements"
                                           rows="1">@isset($event){{$event->requirements}}@endisset</textarea>

@@ -32,6 +32,7 @@ class CreateRacesTable extends Migration
             $table->integer('max_users')->nullable();
             $table->dateTime('signing_deadline')->nullable();
             $table->double('price')->nullable();
+            $table->string('currency')->nullable();
             $table->text('description')->nullable();
             $table->text('requirements')->nullable();
             $table->text('additional_information')->nullable();

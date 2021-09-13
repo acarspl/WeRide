@@ -82,7 +82,7 @@
                     </tr>
                     @if($event->isRace)
                         <th>Signing Fee</th>
-                        <td>{{$event->price}}</td>
+                        <td>{{$event->price." ".$event->currency}}</td>
                     @else
                     <tr>
                         <th class="align-middle">Requirements</th>

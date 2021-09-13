@@ -41,6 +41,7 @@ class RaceRequest extends FormRequest
             'additional_information' =>'nullable|string|min:0|max:276',
             'price'=>'required|numeric|min:0',
             'requirements' =>'nullable|string|min:0|max:276',
+            'currency' =>'nullable|string|min:0|max:3',
         ];
     }
     public function messages()
