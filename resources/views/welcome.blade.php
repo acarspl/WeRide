@@ -55,7 +55,7 @@
         </div>
         <div class="col-6 col-lg-5 col-xl-4 p-0 imageMoreInfoOnHover round-bottom-right" style="position:relative;">
             <img src="{{asset('images/bikers/city_bikers.jpg')}}" class="round-bottom-right" style=" width: 100%;" alt="Group Ride">
-            <a class="btn btn-outline-light btn-lg overlayTextCenterFaded" href="#" >Find out more</a>
+            <a class="btn btn-outline-light btn-lg overlayTextCenterFaded" href="{{route('login')}}" >Find out more</a>
         </div>
     </div>
     <h1 class="text-green text-center mt-5" style="font-size: 60px; font-family: 'Bebas Neue', cursive;">Reviews</h1>

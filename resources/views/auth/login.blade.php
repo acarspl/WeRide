@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-3 offset-md-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
@@ -75,6 +75,10 @@
                             </div>
                         </div>
                     </form>
+                    <div class="row mt-3">
+                        <a class="offset-md-4 col-10 offset-1 col-md-6 btn btn-outline-success" href="{{route('register')}}">
+                            Don't have an account yet? Sign Up for free!</a>
+                    </div>
                 </div>
             </div>
         </div>
