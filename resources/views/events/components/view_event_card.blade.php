@@ -94,19 +94,14 @@
                                 @endif </td>
                         @endif
                     </tr>
-
                     <tr>
                         <td colspan="2">
                             <a class="btn btn-success btn-block" @if($event->isRace) href="{{route('race.show',$event)}}" @else href="{{route('ride.show',$event)}}" @endif>Details</a>
                         </td>
                     </tr>
-
-
                     </tbody>
                 </table>
-
             </div>
         </div>
-
     </div>
 </div>

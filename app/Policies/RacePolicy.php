@@ -22,8 +22,7 @@ class RacePolicy
         //
     }
     public function join(User $user, Race $race){
-        return $user->id !== $race->user_id && !$user->doesParticipate($race) && $race->signing_deadline >= Carbon::now()
-            && ($race->participants()->count() + 1) < $race->max_users;
+        return $race->canJoin($user);
     }
     public function leave(User $user, Race $race){
         return $user->doesParticipate($race) && $race->start_time >= Carbon::now();

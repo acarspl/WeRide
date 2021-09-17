@@ -72,9 +72,23 @@ abstract class Event extends Model
     }
     public abstract function numberOfParticipants():int;
 
+    public abstract function canJoin(User $user):bool;
+
     public function removeAllParticipants(){
             foreach($this->participants as $participant) {
                 $participant->detach();
             }
+    }
+    final public static function recommended(int $limit){
+        //CURRENTLY EVENTS ARE RECOMMENDED BASED ON DISTANCE AND RANDOM FACTOR
+        $events = Ride::nearby($limit*2)->concat(Race::nearby($limit*2));
+        $events->shuffle();
+        $recommended = collect();
+        foreach ($events as $event){
+            if($event->canJoin(auth()->user())){
+                $recommended->push($event);
+            }
+        }
+        return $recommended->take($limit);
     }
 }

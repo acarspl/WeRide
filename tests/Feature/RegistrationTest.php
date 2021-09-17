@@ -31,7 +31,6 @@ class RegistrationTest extends TestCase
         $this->assertDatabaseHas('users', $user);
         $user = User::first();
         $user->email_verified_at = now();
-        $this->actingAs($user)->get('home')->assertStatus(200);
         $this->assertNotNull(User::first()->preferences);
         $this->assertTrue(User::first()->type->name == 'standard');
     }

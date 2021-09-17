@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Event;
+use App\Models\Race;
 use Illuminate\Support\Facades\Auth;
-use League\CommonMark\Inline\Element\AbstractInline;
 
 class HomeController extends Controller
 {
 
     public function index()
     {
-        return view('home');
+        $nearbyRaces = Race::nearby(10)->sortBy('start_time');
+        $recommendedEvents = Event::recommended(10);
+        $joinedEvents = auth()->user()->participatedRacesActive()->concat(auth()->user()->participatedRidesActive())
+            ->concat(auth()->user()->activeRaces())->concat(auth()->user()->activeRides())->sortBy('start_time');
+
+        return view('home',compact('joinedEvents','nearbyRaces','recommendedEvents'));
     }
     public function welcome(){
         if(Auth::check()){
