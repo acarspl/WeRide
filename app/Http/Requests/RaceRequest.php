@@ -47,6 +47,7 @@ class RaceRequest extends FormRequest
     public function messages()
     {
         return [
+            'start_time.*' => 'Start time cannot be in the past',
             'sport_type_id.min' => 'Select the type of sport',
             'start_location_lat.*' => 'Start Location must be selected',
             'end_time.after_or_equal' => 'Race ending time cannot be before the start time',

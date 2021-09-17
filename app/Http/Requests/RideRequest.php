@@ -49,6 +49,7 @@ class RideRequest extends FormRequest
     public function messages()
     {
         return [
+            'start_time.*' => 'Start time cannot be in the past',
             'sport_type_id.min' => 'Select the type of sport',
             'start_location_lat.*' => 'Start Location must be selected',
             'signing_deadline.before_or_equal' => 'Signing deadline cannot be after the start time',
