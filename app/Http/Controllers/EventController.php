@@ -12,23 +12,22 @@ use Illuminate\Support\Facades\Log;
 class EventController extends Controller
 {
     public function indexMyEvents(){
-        $races = Auth::user()->activeRaces();
-        $rides = Auth::user()->activeRides();
-        $races_joined = Auth::user()->participatedRacesActive();
-        $rides_joined  = Auth::user()->participatedRidesActive();
-        $events = $races->concat($rides)->sortBy('start_time');
-        $events_joined = $races_joined->concat($rides_joined)->sortBy('start_time');
+        $events = Auth::user()->activeRaces()->concat(Auth::user()->activeRides())->sortBy('start_time');
+        $events_joined = Auth::user()->participatedRacesActive()->concat( Auth::user()->participatedRidesActive())->sortBy('start_time');
         return view('events.event_view.index_my', compact(['events', 'events_joined']));
     }
     public function index(){
-        $races = Race::indexActive();
-        $rides = Ride::indexActive();
-        $events = $races->concat($rides)->sortBy('start_time')->where('user_id','!=',Auth::id());
+        $events = Race::indexActive()->concat(Ride::indexActive())->sortBy('start_time')->where('user_id','!=',Auth::id());
         return view('events.event_view.index',compact('events'));
     }
     public function indexWithinBounds(GetEventsWithinBoundsRequest $request){ // with filters
         $request = $request->process();
         $events = collect();
+        /* is_race:
+         * 0 - RIDES & RACES
+         * 1 - RIDES ONLY
+         * 2 - RACES ONLY
+         */
         if($request['is_race'] != 1) {
             $events = $events->concat(Race::getActiveWithinBounds($request['latSW'], $request['lngSW'], $request['latNE'],
                 $request['lngNE'])->sportType($request['sport_type'])
