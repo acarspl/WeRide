@@ -15,6 +15,12 @@
         <div class="card mx-auto mt-5 text-center">
             <div class="card-header bg-green mx-0 text-white">Created Events</div>
             <div class="card-body py-1" style="background-color: #e7e7e7">
+                @if($events->count()===0)
+                    <div class="mt-2">
+                        You don't have any active events. Feel free to create one!
+                    </div>
+                    <a href="{{route('ride.create')}}" class="btn btn-green mx-auto mt-2">Create Ride</a>
+                    @endif
                 @foreach($events as $event)
                     @include('events.components.view_event_card',['event'=>$event, 'loop'=>$loop->iteration])
                     @endforeach
