@@ -11,7 +11,10 @@
                 <h5 class="card-header text-center bg-green text-white font-weight-bold">
                     Upcoming races in your area
                 </h5>
-                <div class="card-body pt-0 mx-1 px-1">
+                <div class="card-body pt-0 bg-gray mx-0 px-2">
+                    @if($nearbyRaces->count()===0)
+                        <div class="text-center mt-3">Currently we cannot find any races in your area</div>
+                        @endif
                     @foreach($nearbyRaces as $event)
                         @include('events.components.view_event_card',['event'=>$event, 'loop'=>'j'.$iteration++])
                     @endforeach
@@ -24,7 +27,7 @@
                 <h5 class="card-header text-center bg-green text-white font-weight-bold">
                     Consider participation
                 </h5>
-                <div class="card-body pt-0 mx-1 px-1">
+                <div class="card-body bg-gray pt-0 bg-gray mx-0 px-2">
                     @if($recommendedEvents->count()===0)
                         <div class="text-center mt-3">Currently we cannot recommend you any events</div>
                     @endif
@@ -40,7 +43,7 @@
                 <h5 class="card-header text-center bg-green text-white font-weight-bold">
                     Events you've signed up for
                 </h5>
-                <div class="card-body pt-0 mx-1 px-1">
+                <div class="card-body bg-gray pt-0 bg-gray mx-0 px-2">
                     @if($joinedEvents->count()===0)
                        <div class="text-center">No events found</div>
                         @endif

@@ -99,4 +99,7 @@ body{
     content: " *";
     color: red;
 }
+.bg-gray{
+    background-color: #e7e7e7;
+}
 
