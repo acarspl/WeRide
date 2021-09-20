@@ -7,7 +7,8 @@ which allows users to create, modify, browse and participate in cycling events.
 Backend:
 - PHP 8
 - Laravel 8
-- PHPUnit
+- PHPUnit    
+
 Frontend:
 - HTML5
 - CSS3
