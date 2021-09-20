@@ -68,7 +68,7 @@
                                 @auth
                             <tr>
                                 <th>Organizer</th>
-                                <td>{{$event->user->name}}</td>
+                                <td class="align-middle"><a href="{{route('users.show',$event->user)}}">{{$event->user->name}}</a></td>
                             </tr>
                                     @endauth
                             @endif
@@ -198,7 +198,7 @@
                                     @if(\Illuminate\Support\Facades\Storage::disk('public')->exists('avatars/'.$event->user_id.'.jpg'))
                                         <img src="{{\Illuminate\Support\Facades\Storage::url('avatars/'.$event->user_id.'.jpg')}}" style="width: 45px" class="mx-1 rounded-circle" alt="Avatar">
                                     @endif
-                                    {{$event->user->name}}</td>
+                                <a href="{{route('users.show',$event->user)}}">{{$event->user->name}}</a></td>
                             </tr>
                             @foreach($participants as $participant)
                                 <tr>
@@ -207,7 +207,7 @@
                                         @if(\Illuminate\Support\Facades\Storage::disk('public')->exists('avatars/'.$participant->id.'.jpg'))
                                             <img src="{{\Illuminate\Support\Facades\Storage::url('avatars/'.$participant->id.'.jpg')}}" style="width: 45px" class="mx-1 rounded-circle" alt="Avatar">
                                         @endif
-                                            {{$participant->name}}</td>
+                                            <a href="{{route('users.show',$participant)}}">{{$participant->name}}</a></td>
                                 </tr>
                                 @endforeach
                         </table>
