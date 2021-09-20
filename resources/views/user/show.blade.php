@@ -46,12 +46,15 @@
             </div>
         </div>
             @if($organizing->count()>0)
+                @php
+                $iteration=0;
+                @endphp
                 <div class="card col-12 col-md-11 col-lg-10 col-xl-8  px-0 mt-4 mx-auto">
             <h5 class="card-header bg-green text-white text-center">Organizing</h5>
             <div class="card-body bg-gray pt-0">
                 {{--5 CREATED EVENTS--}}
                 @foreach($organizing as $event)
-                    @include('events.components.view_event_card',['event'=>$event, 'loop'=>$loop->iteration])
+                    @include('events.components.view_event_card',['event'=>$event, 'loop'=>$iteration++])
                 @endforeach
             </div>
         </div>
@@ -62,7 +65,7 @@
                 <div class="card-body bg-gray pt-0">
                     {{--5 UPCOMING PARTICIPATING--}}
                     @foreach($participating as $event)
-                        @include('events.components.view_event_card',['event'=>$event, 'loop'=>$loop->iteration])
+                        @include('events.components.view_event_card',['event'=>$event, 'loop'=>$iteration++])
                     @endforeach
                 </div>
             </div>
