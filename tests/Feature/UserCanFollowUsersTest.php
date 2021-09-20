@@ -21,10 +21,7 @@ class UserCanFollowUsersTest extends TestCase
     public function test_verified_user_can_access_user_search(){
         $this->actingAs($this->users->first());
         $this->get(route('users.index'))->assertStatus(200);
-        if(strlen($this->users[1]->name)<3) {
-            $this->users[1]->name = 'aa';
-        }
-        $this->get(route('users.find',['name'=>substr($this->users[1]->name,1,3)]))->assertStatus(200)->assertSee($this->users[1]->name);
+        $this->get(route('users.find',['name'=>substr($this->users[1]->name,1,4)]))->assertStatus(200)->assertSee($this->users[1]->name);
         $this->get(route('users.find',['name'=>$this->faker->text(30)]))->assertStatus(200)->assertSee('No users found');
     }
     public function test_guest_cannot_access_user_search(){

@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GetEventsWithinBoundsRequest;
 use App\Models\Race;
 use App\Models\Ride;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class EventController extends Controller
 {
@@ -34,6 +32,7 @@ class EventController extends Controller
                 ->startTime('>=', $request['start_time_from'])->startTime('<=', $request['start_time_to'])
                 ->distance('>=', $request['distance_from'])->distance('<=', $request['distance_to'])
                 ->elevation('>=', $request['elevation_from'])->elevation('<=', $request['elevation_to'])
+                ->where('user_id','!=',Auth::id())
                 ->take(200)->get());
         }
         if($request['is_race'] != 2) {
@@ -43,11 +42,12 @@ class EventController extends Controller
                 ->distance('>=', $request['distance_from'])->distance('<=', $request['distance_to'])
                 ->elevation('>=', $request['elevation_from'])->elevation('<=', $request['elevation_to'])
                 ->speedLessThan($request['speed_to'])->speedMoreThan($request['speed_from'])
+                ->where('user_id','!=',Auth::id())
                 ->take(200)->get());
         }
         foreach ($events as $event){
             $event->number_of_participants = $event->numberOfParticipants();
         }
-        return $events->where('user_id','!=',Auth::id());
+        return $events;
     }
 }
