@@ -53,6 +53,12 @@ Route::middleware(['auth','verified'])->group(function(){
         Route::patch('/',[\App\Http\Controllers\UserPreferencesController::class, 'update'])->name('user.preferences.update');
         Route::patch('/location',[\App\Http\Controllers\UserPreferencesController::class, 'updateLocation'])->name('user.preferences.update.location');
     });
+    //Users
+    Route::prefix('/user')->group(function(){
+       Route::get('/',[App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+       Route::get('/find',[\App\Http\Controllers\UserController::class,'find'])->name('users.find');
+       Route::get('/{user}',[App\Http\Controllers\UserController::class,'show'])->name('users.show');
+    });
 });
 // Guest Routes
 Route::get('/race',[\App\Http\Controllers\RaceController::class, 'index'])->name('race.index');

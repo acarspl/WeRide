@@ -97,4 +97,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function leaveRace(Race $race):bool{
         return $race->participants()->where('participant_id',$this->id)->detach();
     }
+    public function eventStats(){
+        $stats = (object)[];
+        $stats->createdUpcomingRides = $this->activeRides()->count();
+        $stats->participatedUpcomingRides = $this->participatedRidesActive()->count();
+        $stats->createdUpcomingRaces = $this->activeRaces()->count();
+        $stats->participatedUpcomingRaces = $this->participatedRacesActive()->count();
+        $stats->createdPastRides = $this->rides()->count() - $this->activeRides()->count();
+        $stats->participatedPastRides = $this->participatedRides()->count() - $this->participatedRidesActive()->count();
+        $stats->createdPastRaces = $this->races()->count() - $this->activeRaces()->count();
+        $stats->participatedPastRaces = $this->participatedRaces()->count() - $this->participatedRacesActive()->count();
+        return $stats;
+    }
 }
