@@ -2,7 +2,6 @@
 </div>
 @include('events.components.filter_events')
 <script type="text/javascript">
-    mapBoxToken = '{{config('services.mapbox.token')}}';
     metricUnits = @auth'{{Auth::user()->preferences->metric}}' @else '1' @endauth;
     defaultLocationLat = @auth'{{\Illuminate\Support\Facades\Auth::user()->preferences->location_lat}}'@else '51.505' @endauth ;
     defaultLocationLng = @auth'{{\Illuminate\Support\Facades\Auth::user()->preferences->location_lng}}'@else '-0.09' @endauth;

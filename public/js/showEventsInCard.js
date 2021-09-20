@@ -24,14 +24,11 @@ function showEventsInCards(newEvents){
                 });
                 var startMap = L.map('location_map_'+${i}).setView([${newEvents[i].start_location_lat}, ${newEvents[i].start_location_lng}], 14);
 
-                L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                    maxZoom: 17,
-                    id: 'mapbox/streets-v11',
-                    tileSize: 512,
-                    zoomOffset: -1,
-                    accessToken: mapBoxToken,
-                }).addTo(startMap);
+        L.tileLayer('https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            bounds: bounds,
+            maxZoom: 17,
+        }).addTo(startMap);
                 L.marker([${newEvents[i].start_location_lat}, ${newEvents[i].start_location_lng}],{
                     icon: startIcon,
                     draggable: false,

@@ -2,7 +2,6 @@
 
 </div>
 <script type="text/javascript">
-     mapBoxToken = '{{config('services.mapbox.token')}}';
      iteration = '{{$iteration}}';
      lat = '{{$lat}}';
      lng = '{{$lng}}';

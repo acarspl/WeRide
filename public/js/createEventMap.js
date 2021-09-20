@@ -13,13 +13,9 @@ let endMarker = null;
 let isRoundTrip = true;
 
 var startMap = L.map('start_location_map').setView([defaultLocationLat, defaultLocationLng], 13);
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+L.tileLayer('https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     maxZoom: 17,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: mapBoxToken,
 }).addTo(startMap);
 
 if(defaultLocationLat !== '' && defaultLocationLng !==''){
@@ -62,13 +58,9 @@ if(document.getElementById('end_location_map')!== null){
     else{
         var endMap = L.map('end_location_map').setView([defaultLocationLat, defaultLocationLng], 13);
     }
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    L.tileLayer('https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
         maxZoom: 17,
-        id: 'mapbox/streets-v11',
-        tileSize: 512,
-        zoomOffset: -1,
-        accessToken: mapBoxToken,
     }).addTo(endMap);
     endMap.on('click',function(e){
         if(!endMarker){

@@ -87,9 +87,7 @@
             </div>
         </div>
     </div>
-    {{--ADD MAPBOX TOKEN FORM ENV FILE--}}
     <script type="text/javascript">
-        let mapBoxToken = "{{config('services.mapbox.token')}}";
         let defaultLocationLat = "{{$preferences->location_lat}}";
         let defaultLocationLng = "{{$preferences->location_lng}}";
     </script>

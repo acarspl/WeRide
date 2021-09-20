@@ -165,8 +165,6 @@
         </div>
     </div>
     <script type="text/javascript">
-            {{--ADD MAPBOX TOKEN FORM ENV FILE--}}
-        let mapBoxToken = "{{config('services.mapbox.token')}}";
             {{--SET JS VARIABLES--}}
         let metricUnits = 'true'==="{{\Illuminate\Support\Facades\Auth::user()->preferences->metric}}";
         let endLocationLat = null;
