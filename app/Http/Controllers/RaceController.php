@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class RaceController extends Controller
 {
     public function create(){
-        $isRace = true;
-        return view('event_management.manage_event',compact('isRace'));
+        return view('event_management.race.manage');
     }
     public function index(){
         return view('event_management.race.index');
@@ -38,9 +37,8 @@ class RaceController extends Controller
         return response()->json(['success'=>Auth::user()->leaveRace($race)]);
     }
     public function edit(Race $race){
-        $isRace = true;
         $event = $race;
-        return view('event_management.manage_event',compact('isRace','event'));
+        return view('event_management.race.manage',compact('event'));
     }
     public function update(RaceRequest $request, Race $race){
         $race->fill($request->validated());

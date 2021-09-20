@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class RideController extends Controller
 {
     public function create(){
-        $isRace = false;
-        return view('event_management.manage_event', compact('isRace'));
+        return view('event_management.ride.manage');
     }
     public function store(RideRequest $request){
         $ride = new Ride();
@@ -37,9 +36,8 @@ class RideController extends Controller
         return response()->json(['success'=>Auth::user()->leaveRide($ride)]);
     }
     public function edit(Ride $ride){
-        $isRace = false;
         $event = $ride;
-        return view('event_management.manage_event', compact('isRace', 'event'));
+        return view('event_management.ride.manage', compact( 'event'));
     }
     public function update(RideRequest $request, Ride $ride){
         $ride->fill($request->validated());
