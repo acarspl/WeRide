@@ -20,6 +20,10 @@
                     <h5 class="mt-2 font-weight-bold text-green">Statistics</h5>
                     <table class="table col-12 col-md-8 mx-auto">
                         <tr>
+                            <th>Followers</th>
+                            <td class="text-left">{{$user->followers()->count()}}</td>
+                        </tr>
+                        <tr>
                             <th colspan="2" class="bg-gray font-weight-bold text-center">Organized:</th>
                         </tr>
                         <tr>

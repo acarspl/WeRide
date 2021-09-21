@@ -55,10 +55,16 @@ Route::middleware(['auth','verified'])->group(function(){
     });
     //Users
     Route::prefix('/user')->group(function(){
+        // Following
+        Route::post('/follow/{user}',[App\Http\Controllers\FollowingController::class,'follow'])->middleware('can:follow,user')->name('users.follow');
+        Route::delete('/unfollow/{user}',[App\Http\Controllers\FollowingController::class,'unfollow'])->middleware('can:unfollow,user')->name('users.unfollow');
+            // index, search, show
        Route::get('/',[App\Http\Controllers\UserController::class, 'index'])->name('users.index');
        Route::get('/find',[\App\Http\Controllers\UserController::class,'find'])->name('users.find');
        Route::get('/{user}',[App\Http\Controllers\UserController::class,'show'])->name('users.show');
     });
+
+
 });
 // Guest Routes
 Route::get('/race',[\App\Http\Controllers\RaceController::class, 'index'])->name('race.index');

@@ -27,5 +27,37 @@ class UserCanFollowUsersTest extends TestCase
     public function test_guest_cannot_access_user_search(){
         $this->get(route('users.index'))->assertStatus(302)->assertRedirect(route('login'));
     }
+    public function test_user_can_follow_other_user(){
+        $this->actingAs($this->users[0]);
+        $this->post(route('users.follow',$this->users[1]))->assertStatus(200);
+        $this->assertDatabaseCount('followers',1);
+        $this->assertTrue($this->users[0]->isFollowing($this->users[1]));
+        $this->assertTrue($this->users[1]->followers()->count()===1);
+    }
+    public function test_user_cannot_follow_other_user_when_already_following(){
+        $this->actingAs($this->users[0]);
+        $this->post(route('users.follow',$this->users[1]))->assertStatus(200);
+        $this->assertDatabaseCount('followers',1);
+        $this->post(route('users.follow',$this->users[1]))->assertStatus(403);
+        $this->assertDatabaseCount('followers',1);
+    }
+    public function test_user_cannot_follow_itself(){
+        $this->actingAs($this->users[0]);
+        $this->post(route('users.follow',$this->users[0]))->assertStatus(403);
+        $this->assertDatabaseCount('followers',0);
+    }
+    public function test_user_can_unfollow_following_user(){
+        $this->actingAs($this->users[0]);
+        $this->post(route('users.follow',$this->users[1]))->assertStatus(200);
+        $this->assertDatabaseCount('followers',1);
+        $this->delete(route('users.unfollow',$this->users[1]))->assertStatus(200);
+        $this->assertDatabaseCount('followers',0);
+        $this->assertFalse($this->users[0]->isFollowing($this->users[1]));
+        $this->assertTrue($this->users[1]->followers()->count()===0);
+    }
+    public function test_user_cannot_unfollow_not_followed_user(){
+        $this->actingAs($this->users[0]);
+        $this->delete(route('users.unfollow',$this->users[1]))->assertStatus(403);
+    }
 
 }

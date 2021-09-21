@@ -58,6 +58,21 @@ class User extends Authenticatable implements MustVerifyEmail
     public function rides(){
         return $this->hasMany(Ride::class);
     }
+    public function followers(){
+        return $this->belongsToMany(User::class,'followers','following_id','follower_id');
+    }
+    public function following(){
+        return $this->belongsToMany(User::class,'followers','follower_id','following_id');
+    }
+    public function follow(User $user) {
+        return $this->following()->save($user);
+    }
+    public function unfollow(User $user):bool {
+        return $this->following()->where('following_id',$user->id)->detach();
+    }
+    public function isFollowing(User $user):bool {
+        return $this->following()->where('following_id',$user->id)->count() === 1;
+    }
     public function activeRides(){
         return $this->rides()->whereDate('start_time','>=', Carbon::now())->get();
     }
