@@ -26,7 +26,6 @@ function showEventsInCards(newEvents){
 
         L.tileLayer('https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-            bounds: bounds,
             maxZoom: 17,
         }).addTo(startMap);
                 L.marker([${newEvents[i].start_location_lat}, ${newEvents[i].start_location_lng}],{
