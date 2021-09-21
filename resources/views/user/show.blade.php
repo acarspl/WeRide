@@ -21,7 +21,7 @@
                     <table class="table col-12 col-md-8 mx-auto">
                         <tr>
                             <th>Followers</th>
-                            <td class="text-left">{{$user->followers()->count()}}</td>
+                            <td class="text-left" id="followers-count">{{$user->followers()->count()}}</td>
                         </tr>
                         <tr>
                             <th colspan="2" class="bg-gray font-weight-bold text-center">Organized:</th>
@@ -46,7 +46,8 @@
                             <td class="text-left">{{$stats->participatedPastRaces.' / '.$stats->participatedUpcomingRaces}}</td>
                         </tr>
                     </table>
-                <button class="btn btn-primary btn-lg btn-block mt-3 mb-0 mx-0">Follow</button>
+                <button type="button" id="follow-{{$user->id}}" onclick="follow({{$user->id}})" class="btn btn-primary btn-lg btn-block mt-3 mb-0 mx-0 @cannot('follow',$user) d-none @endcannot">Follow</button>
+                <button type="button" id="unfollow-{{$user->id}}" onclick="unfollow({{$user->id}})" class="btn btn-outline-primary btn-lg btn-block mt-3 mb-0 mx-0 @cannot('unfollow',$user) d-none @endcannot">Unfollow</button>
             </div>
         </div>
             @if($organizing->count()>0)
@@ -77,4 +78,5 @@
 
 
     </div>
+    <script type="text/javascript" src="{{asset('js/followUsers.js')}}"></script>
 @endsection

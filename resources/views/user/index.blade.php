@@ -35,7 +35,10 @@
                             <img src="{{\Illuminate\Support\Facades\Storage::url('avatars/'.$user->id.'.jpg')}}" style="width: 40px" class="mx-1 rounded-circle" alt="Avatar">
                         @endif</td>
                     <td class="align-middle"><a href="{{route('users.show',$user)}}">{{$user->name}}</a></td>
-                    <td class="align-middle"><form action="#"><button type="button" class="btn btn-sm btn-green">Follow</button> </form></td>
+                    <td class="align-middle">
+                            <button type="button" id="follow-{{$user->id}}" onclick="follow({{$user->id}})" class="btn btn-sm btn-primary @cannot('follow',$user) d-none @endcannot">Follow</button>
+                        <button type="button" id="unfollow-{{$user->id}}" onclick="unfollow({{$user->id}})" class="btn btn-sm btn-outline-primary @cannot('unfollow',$user) d-none @endcannot">Unfollow</button>
+                    </td>
                 </tr>
                 @endforeach
         </table>
@@ -44,5 +47,5 @@
 
     </div>
 
-
+    <script type="text/javascript" src="{{asset('js/followUsers.js')}}"></script>
     @endsection
