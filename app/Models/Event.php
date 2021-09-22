@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 abstract class Event extends Model
 {
@@ -79,16 +80,41 @@ abstract class Event extends Model
                 $participant->detach();
             }
     }
-    final public static function recommended(int $limit){
-        //CURRENTLY EVENTS ARE RECOMMENDED BASED ON DISTANCE AND RANDOM FACTOR
-        $events = Ride::nearby($limit*2)->concat(Race::nearby($limit*2));
-        $events->shuffle();
+    final public static function recommended(int $limit):Collection{
+        $recommendedRides = collect();
+        $recommendedRaces = collect();
+        $following = auth()->user()->following;
+        foreach ($following as $follow){
+            $recommendedRides =  $recommendedRides->concat($follow->activeRides());
+            $recommendedRaces =  $recommendedRaces->concat($follow->activeRaces());
+        }
+        $recommendedRides = self::filterCollectionToJoinable($recommendedRides);
+        $recommendedRaces = self::filterCollectionToJoinable($recommendedRaces);
+        if($recommendedRides->count() + $recommendedRaces->count() >= $limit){
+            return $recommendedRides->concat($recommendedRaces)->sortBy('start_time')->take($limit)->values();
+        }
+        foreach ($following as $follow){
+            $recommendedRides =  $recommendedRides->concat($follow->participatedRidesActive());
+            $recommendedRaces =  $recommendedRaces->concat($follow->participatedRacesActive());
+        }
+        $recommendedRides =self::filterCollectionToJoinable($recommendedRides)->unique('id');
+        $recommendedRaces = self::filterCollectionToJoinable($recommendedRaces)->unique('id');
+        if($recommendedRides->count() + $recommendedRaces->count() >= $limit){
+            return $recommendedRides->concat($recommendedRaces)->sortBy('start_time')->take($limit)->values();
+        }
+        $nearbyRides =  self::filterCollectionToJoinable(Ride::nearby($limit))->shuffle();
+        $nearbyRaces = self::filterCollectionToJoinable(Race::nearby($limit))->shuffle();
+        $recommendedRides = $recommendedRides->concat($nearbyRides)->unique('id');
+        $recommendedRaces = $recommendedRaces->concat($nearbyRaces)->unique('id');
+        return $recommendedRides->concat($recommendedRaces)->sortBy('start_time')->take($limit)->values();
+    }
+    private static final function filterCollectionToJoinable(Collection $collection):Collection{
         $recommended = collect();
-        foreach ($events as $event){
+        foreach ($collection as $event){
             if($event->canJoin(auth()->user())){
                 $recommended->push($event);
             }
         }
-        return $recommended->take($limit);
+        return $recommended;
     }
 }
