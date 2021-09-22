@@ -45,7 +45,7 @@
                 </h5>
                 <div class="card-body bg-gray pt-0 bg-gray mx-0 px-2">
                     @if($joinedEvents->count()===0)
-                       <div class="text-center">No events found</div>
+                       <div class="text-center mt-3">No events found</div>
                         @endif
                     @foreach($joinedEvents as $event)
                             @include('events.components.view_event_card',['event'=>$event, 'loop'=>'j'.$iteration++])
