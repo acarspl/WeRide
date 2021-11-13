@@ -166,7 +166,7 @@
     </div>
     <script type="text/javascript">
             {{--SET JS VARIABLES--}}
-        let metricUnits = 'true'==="{{\Illuminate\Support\Facades\Auth::user()->preferences->metric}}";
+        let metricUnits = '1'==="{{\Illuminate\Support\Facades\Auth::user()->preferences->metric}}";
         let endLocationLat = null;
         let endLocationLng = null;
             @isset($event)
