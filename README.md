@@ -19,8 +19,15 @@ Frontend:
 
 ## How to run it
 
-Run the following commands: 
- 
+Create a database locally named weride utf8_general_ci
+
+Rename .env.example file to .env inside the project root and fill the database information
+
+Run the following commands:   
+
+`composer install`    
+`npm install && npm run dev`  
+`php artisan key:generate`  
 `php artisan migrate`  
 `php artisan db:seed`  
 `php artisan serve`  
