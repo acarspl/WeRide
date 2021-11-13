@@ -19,7 +19,7 @@ Frontend:
 
 ## How to run it
 
-Create a database locally named weride utf8_general_ci
+Create a database locally named `weride` utf8_general_ci
 
 Rename .env.example file to .env inside the project root and fill the database information
 
@@ -31,6 +31,11 @@ Run the following commands:
 `php artisan migrate`  
 `php artisan db:seed`  
 `php artisan serve`  
+
+Register user  
+To verify the e-mail address (e-mails are send to log in the development version) go to  
+ `Storage->logs->laravel.log` and copy&paste the activation link to the browser or change the field manually in the database
+ `users.email_verified_at`
 
 ## Author
 Created by: Adam Szczepkowski (UTH 27781)
