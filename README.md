@@ -25,3 +25,6 @@ Run the following commands:
 `php artisan db:seed`  
 `php artisan serve`  
 
+## Author
+Created by: Adam Szczepkowski (UTH 27781)
+
